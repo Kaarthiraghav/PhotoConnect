@@ -17,7 +17,7 @@ body {
     padding: 50px 0;
 }
 
-.signin-form-container {
+.signup-form-container {
     display: flex;
     width: 800px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -27,32 +27,66 @@ body {
 }
 
 
-.signin-section {
-    width: 50%;
+.welcome-section {
+    width: 40%;
+    background: black;
+    color: white;
     padding: 40px;
-    text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
-.logo-PhotoConnect {
+.logo {
     font-weight: 700;
-    font-size: 1.2em;
-    color: black;
-    text-align: left;
-    margin-bottom: 20px;
+    font-size: 1.5em;
+    position: absolute;
+    top: 20px;
+    left: 20px;
 }
 
-.signin-section h2 {
+.welcome-section h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.welcome-section p {
+    font-weight: 300;
+    margin-bottom: 30px;
+}
+
+.sign-in-btn {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+.sign-in-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Create Account Section (Right Panel) */
+.create-account-section {
+    width: 60%;
+    padding: 40px;
+    text-align: center;
+}
+
+.create-account-section h3 {
     color: black;
     font-size: 2em;
-    margin-bottom: 25px;
-}
-
-.separator {
-    color: #999;
-    font-size: 0.9em;
+    margin-top: 0;
     margin-bottom: 20px;
 }
 
@@ -79,63 +113,22 @@ body {
     padding: 5px 0;
 }
 
-.sign-in-btn-main {
+.sign-up-btn {
     background-color: black;
     color: white;
     border: none;
     padding: 12px 50px;
     border-radius: 20px;
+    margin-top: 10px;
     font-size: 1em;
     font-weight: 500;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
-.sign-in-btn-main:hover {
+.sign-up-btn:hover {
     background-color: #333;
 }
-
-
-.hello-friend-section {
-    width: 50%;
-
-    background: black;
-    color: white;
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.hello-friend-section h2 {
-    font-size: 2em;
-    margin-bottom: 10px;
-}
-
-.hello-friend-section p {
-    font-weight: 300;
-    margin-bottom: 30px;
-}
-
-.sign-up-btn {
-    background: transparent;
-    border: 2px solid white;
-    color: white;
-    padding: 10px 30px;
-    border-radius: 20px;
-    font-weight: 500;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    transition: background-color 0.3s;
-}
-
-.sign-up-btn:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
 
 .photoconnect-footer {
     background-color: #000000;
@@ -170,8 +163,6 @@ body {
 
 .contact-info i {
     margin-right: 10px;
-    width: 16px;
-    text-align: center;
 }
 
 .footer-links {
@@ -183,6 +174,10 @@ body {
 
 .nav-links, .career-links {
     line-height: 1.8;
+}
+
+.nav-links p, .career-links p {
+    margin: 0;
 }
 
 .footer-links a {
