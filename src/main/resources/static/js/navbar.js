@@ -23,14 +23,13 @@ function renderNavRight() {
     `;
   } else {
     right.innerHTML = `<button class="signin-btn" id="signIn" aria-label="Sign In">Sign In</button>`;
-    const btn = document.getElementById('signIn');
+    const btn = document.getElementById("signIn");
     if (btn) {
-      btn.addEventListener('click', () => {
+      btn.addEventListener("click", () => {
         // Demo: mark as logged in; replace with real flow later
-        localStorage.setItem('pcLoggedIn','true');
+        localStorage.setItem("pcLoggedIn", "true");
         renderNavRight();
       });
     }
   }
 }
-  });
