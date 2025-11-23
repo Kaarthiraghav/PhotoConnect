@@ -5,6 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
+<<<<<<< HEAD
 		<version>3.5.7</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
@@ -13,6 +14,16 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>PhotoConnect</name>
 	<description>Demo project for Spring Boot</description>
+=======
+		<version>4.0.0</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.example</groupId>
+	<artifactId>signin</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>signin</name>
+	<description>project for Spring Boot</description>
+>>>>>>> 2cef929 (Add signin code)
 	<url/>
 	<licenses>
 		<license/>
@@ -36,6 +47,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+<<<<<<< HEAD
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
@@ -44,6 +56,19 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
+=======
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webmvc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+>>>>>>> 2cef929 (Add signin code)
 		</dependency>
 		<dependency>
 			<groupId>com.mysql</groupId>
@@ -57,7 +82,21 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+<<<<<<< HEAD
 			<artifactId>spring-boot-starter-test</artifactId>
+=======
+			<artifactId>spring-boot-starter-data-jpa-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webmvc-test</artifactId>
+>>>>>>> 2cef929 (Add signin code)
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
