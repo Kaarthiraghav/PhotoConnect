@@ -138,60 +138,60 @@ body {
 
 
 .photoconnect-footer {
-    background-color: #000000;
-    color: #cccccc;
-    padding: 40px 80px;
-    font-family: 'Playfair Display', serif;
-}
+            background-color: #000000;
+            color: #cccccc;
+            padding: 40px 80px;
+            font-family: 'Playfair Display', serif;
+        }
 
-.footer-content {
-    display: flex;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-}
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-.contact-info {
-    flex: 1;
-    min-width: 200px;
-}
+        .contact-info {
+            flex: 1;
+            min-width: 200px;
+        }
 
-.brand {
-    font-size: 1.5em;
-    font-weight: 700;
-    margin-bottom: 15px;
-    color: white;
-}
+        .brand {
+            font-size: 1.5em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: white;
+        }
 
-.contact-info p {
-    margin: 5px 0;
-    font-size: 0.9em;
-}
+        .contact-info p {
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
 
-.contact-info i {
-    margin-right: 10px;
-    width: 16px;
-    text-align: center;
-}
+        .contact-info i {
+            margin-right: 10px;
+            width: 16px;
+            text-align: center;
+        }
 
-.footer-links {
-    display: flex;
-    gap: 100px;
-    flex: 2;
-    justify-content: flex-end;
-}
+        .footer-links {
+            display: flex;
+            gap: 100px;
+            flex: 2;
+            justify-content: flex-end;
+        }
 
-.nav-links, .career-links {
-    line-height: 1.8;
-}
+        .nav-links, .career-links {
+            line-height: 1.8;
+        }
 
-.footer-links a {
-    color: #cccccc;
-    text-decoration: none;
-    transition: color 0.3s;
-    font-size: 0.9em;
-}
+        .footer-links a {
+            color: #cccccc;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.9em;
+        }
 
-.footer-links a:hover {
-    color: white;
-}
+        .footer-links a:hover {
+            color: white;
+        }
