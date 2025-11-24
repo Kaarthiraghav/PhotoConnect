@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Photographer Profile - PhotoConnect</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <div id="navbar"></div>
+
+    <main class="profile-page">
+      <section class="profile-hero">
+        <div class="profile-hero-bg"></div>
+        <div class="profile-hero-inner">
+          <div class="avatar-outer">
+            <img
+              id="photographer-avatar"
+              src="/images/default-avatar.png"
+              alt="Photographer avatar"
+              class="profile-avatar"
+            />
+          </div>
+          <h2 id="photographer-name">John Doe</h2>
+        </div>
+      </section>
+
+      <section class="profile-main">
+        <div class="profile-details">
+          <div class="info-card">
+            <p class="info-row">
+              <strong>Rate:</strong>
+              <span id="photographer-rate">$60 / hr</span>
+            </p>
+            <p class="info-row">
+              <strong>Location:</strong>
+              <span id="photographer-location">Colombo, LK</span>
+            </p>
+            <p class="info-row"><strong>Description:</strong></p>
+            <p id="photographer-desc" class="desc">
+              Experienced portrait and landscape photographer. Loves natural
+              light and candid moments.
+            </p>
+          </div>
+        </div>
+
+        <aside class="profile-booking">
+          <div class="calendar-card">
+            <label for="booking-date">Select Date</label>
+            <input id="booking-date" type="date" />
+            <div class="book-cta">
+              <button id="book-now" class="primary-btn">Book Now</button>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="past-work-section">
+        <h3 class="section-heading">Past Work</h3>
+        <div id="past-work" class="past-work-grid">
+          <!-- gallery items injected here -->
+        </div>
+      </section>
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="/js/navbar.js"></script>
+    <script src="/js/footer.js"></script>
+    <script src="/js/photographer.js"></script>
+  </body>
+</html>
