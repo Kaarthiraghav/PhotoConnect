@@ -1,0 +1,332 @@
+
+    :root {
+        --primary-dark: #1a1a1a;
+        --primary-light: #ffffff;
+        --text-dark: #333;
+        --text-light: #f0f0f0;
+        --accent-blue: #007bff; /* For buttons or highlights */
+        --border-color: #ddd;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f0f2f5;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        color: var(--text-dark);
+    }
+
+  .navbar {
+    padding: 16px 42px;
+    background: var(--color-surface);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    backdrop-filter: saturate(180%) blur(8px);
+  }
+  .navbar .logo {
+    font-size: 22px;
+    font-weight: 700;
+    text-decoration: none;
+    color: #000;
+    letter-spacing: 0.5px;
+  }
+  .navbar .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 26px;
+    margin: 0;
+    padding: 0;
+  }
+  .navbar .nav-links a {
+    text-decoration: none;
+    color: var(--color-text-soft);
+    font-size: 14px;
+    position: relative;
+    padding: 4px 2px;
+  }
+  .navbar .nav-links a:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-accent);
+    transition: var(--transition);
+  }
+  .navbar .nav-links a:hover:after,
+  .navbar .nav-links a:focus:after {
+    width: 100%;
+  }
+  .navbar .signin-btn {
+    background: var(--color-accent);
+    color: #fff;
+    padding: 8px 18px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+  }
+  .navbar .signin-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+
+    /* --- Main Content Area (Form Container) --- */
+    .main-content {
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px 20px;
+    }
+
+    .form-card {
+        display: flex;
+        background-color: var(--primary-light);
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        overflow: hidden;
+        max-width: 1000px;
+        width: 90%;
+    }
+
+    /* --- Left Panel: Registration Info --- */
+    .registration-info-panel {
+        background-color: var(--primary-dark);
+        color: var(--text-light);
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 40%;
+        background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://via.placeholder.com/600x800/222222/cccccc?text=Camera+Icon');
+        background-size: cover;
+        background-position: center;
+    }
+    .registration-info-panel .logo {
+         font-size: 28px;
+         font-weight: 700;
+         margin-bottom: 20px;
+    }
+    .registration-info-panel h2 {
+        font-size: 32px;
+        margin-bottom: 20px;
+        font-weight: 600;
+        color: var(--accent-blue);
+    }
+    .registration-info-panel p {
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 30px;
+        max-width: 300px;
+        font-weight: 300;
+    }
+    .info-list {
+        list-style: none;
+        text-align: left;
+        padding: 0;
+        width: 100%;
+        max-width: 300px;
+    }
+    .info-list li {
+        margin-bottom: 10px;
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+    }
+    .info-list li::before {
+        content: '📸';
+        margin-right: 10px;
+    }
+
+    /* --- Right Panel: Create Account Form --- */
+    .create-account-panel {
+        padding: 40px;
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start; /* Corrected to align content to the top */
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    .create-account-panel h2 {
+        font-size: 28px;
+        margin-bottom: 30px;
+        text-align: center;
+        color: var(--primary-dark);
+        font-weight: 600;
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: var(--text-dark);
+    }
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="password"],
+    .form-group input[type="date"],
+    .form-group input[type="number"],
+    .form-group textarea {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid var(--border-color);
+        border-radius: 25px;
+        font-size: 16px;
+        font-family: 'Poppins', sans-serif;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .form-group input[type="file"] {
+        width: 100%;
+        padding: 8px 0;
+        border-radius: 5px;
+        font-size: 16px;
+        font-family: 'Poppins', sans-serif;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+        border-color: var(--accent-blue);
+        box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+        outline: none;
+    }
+    .form-group small {
+        display: block;
+        margin-top: 5px;
+        color: #888;
+        font-size: 13px;
+        padding-left: 15px;
+    }
+
+    .checkbox-group label {
+        display: inline-block;
+        margin-bottom: 0;
+        font-weight: normal;
+        margin-left: 5px;
+    }
+    .checkbox-group input[type="checkbox"] {
+        margin-right: 5px;
+    }
+
+    .submit-button {
+        background-color: var(--accent-blue);
+        color: var(--primary-light);
+        padding: 15px 30px;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: 600;
+        width: 100%;
+        margin-top: 20px;
+        transition: background-color 0.3s ease;
+    }
+    .submit-button:hover {
+        background-color: #0056b3;
+    }
+
+    /* --- Footer Styling --- */
+    .footer {
+        background-color: var(--primary-dark);
+        color: var(--text-light);
+        padding: 30px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+    .footer-section {
+        flex: 1;
+        min-width: 200px;
+    }
+    .footer-section .logo {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: var(--primary-light);
+    }
+    .footer-section p, .footer-section a {
+        font-size: 14px;
+        color: var(--text-light);
+        line-height: 1.8;
+        text-decoration: none;
+        display: block;
+    }
+    .footer-section a:hover {
+        text-decoration: underline;
+    }
+    .footer-section h4 {
+        font-size: 18px;
+        margin-bottom: 15px;
+        color: var(--primary-light);
+        font-weight: 600;
+    }
+    .footer-section ul {
+        list-style: none;
+    }
+    .footer-section ul li {
+        margin-bottom: 8px;
+    }
+
+    /* --- Media Queries for Responsiveness --- */
+    @media (max-width: 850px) {
+        .form-card {
+            flex-direction: column;
+            width: 95%;
+            max-width: 500px;
+        }
+        .registration-info-panel, .create-account-panel {
+            width: 100%;
+            padding: 30px;
+            max-height: unset;
+            overflow-y: unset;
+        }
+        .registration-info-panel {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px 10px 0 0;
+        }
+        .create-account-panel {
+            border-radius: 0 0 10px 10px;
+        }
+        .registration-info-panel h2 {
+            font-size: 28px;
+        }
+        .create-account-panel h2 {
+            font-size: 24px;
+        }
+        .footer {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .footer-section {
+            min-width: unset;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .footer-section:last-child {
+            margin-bottom: 0;
+        }
+    }
+</style>
