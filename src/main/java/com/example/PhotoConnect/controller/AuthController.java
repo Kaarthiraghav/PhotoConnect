@@ -3,6 +3,9 @@ package com.example.PhotoConnect.controller;
 import com.example.PhotoConnect.dto.AuthResponse;
 import com.example.PhotoConnect.dto.RegisterRequest;
 import com.example.PhotoConnect.dto.LoginRequest;
+import com.example.PhotoConnect.dto.VerifyEmailRequest;
+import com.example.PhotoConnect.dto.ForgotPasswordRequest;
+import com.example.PhotoConnect.dto.ResetPasswordRequest;
 import com.example.PhotoConnect.service.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +20,16 @@ import java.util.Map;
 @RequestMapping("/api/auth")
 @CrossOrigin
 public class AuthController {
-    
+
     @Autowired
     private AuthService authService;
-    
+
     @PostMapping("/register")
     public ResponseEntity<?> registerClient(@Valid @RequestBody RegisterRequest registerRequest) {
         try {
-            AuthResponse response = authService.registerClient(registerRequest);
+            String message = authService.registerClient(registerRequest);
+            Map<String, String> response = new HashMap<>();
+            response.put("message", message);
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
         } catch (RuntimeException e) {
             Map<String, String> error = new HashMap<>();
@@ -63,5 +68,50 @@ public class AuthController {
         Map<String, String> payload = new HashMap<>();
         payload.put("message", "Logged out successfully. Remove token on client.");
         return ResponseEntity.ok(payload);
+    }
+
+    @PostMapping("/verify-email")
+    public ResponseEntity<?> verifyEmail(@Valid @RequestBody VerifyEmailRequest request) {
+        try {
+            authService.verifyEmail(request);
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Email verified successfully");
+            return ResponseEntity.ok(response);
+        } catch (RuntimeException e) {
+            Map<String, String> error = new HashMap<>();
+            error.put("error", "Verification failed");
+            error.put("message", e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+        }
+    }
+
+    @PostMapping("/forgot-password")
+    public ResponseEntity<?> forgotPassword(@Valid @RequestBody ForgotPasswordRequest request) {
+        try {
+            authService.forgotPassword(request);
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Password reset email sent");
+            return ResponseEntity.ok(response);
+        } catch (RuntimeException e) {
+            Map<String, String> error = new HashMap<>();
+            error.put("error", "Request failed");
+            error.put("message", e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+        }
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<?> resetPassword(@Valid @RequestBody ResetPasswordRequest request) {
+        try {
+            authService.resetPassword(request);
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Password reset successfully");
+            return ResponseEntity.ok(response);
+        } catch (RuntimeException e) {
+            Map<String, String> error = new HashMap<>();
+            error.put("error", "Reset failed");
+            error.put("message", e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+        }
     }
 }
