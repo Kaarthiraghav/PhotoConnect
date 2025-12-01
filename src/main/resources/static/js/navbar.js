@@ -9,8 +9,9 @@ function renderNavRight() {
   const right = document.getElementById("navRight");
   if (!right) return;
 
-  const loggedIn = localStorage.getItem("pcLoggedIn") === "true";
-  if (loggedIn) {
+  const token = localStorage.getItem("token");
+  
+  if (token) {
     right.innerHTML = `
       <button class="icon-btn" id="notifBtn" aria-label="Notifications">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -19,17 +20,18 @@ function renderNavRight() {
         </svg>
         <span class="badge">1</span>
       </button>
-      <img class="avatar" src="https://i.pravatar.cc/64?img=12" alt="User"/>
+      <div class="user-menu">
+        <img class="avatar" src="https://i.pravatar.cc/64?img=12" alt="User" id="userAvatar"/>
+        <button id="logoutBtn" class="logout-btn">Logout</button>
+      </div>
     `;
+    
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+        localStorage.removeItem('token');
+        window.location.href = '/pages/signin.html';
+    });
+
   } else {
-    right.innerHTML = `<button class="signin-btn" id="signIn" aria-label="Sign In">Sign In</button>`;
-    const btn = document.getElementById("signIn");
-    if (btn) {
-      btn.addEventListener("click", () => {
-        // Demo: mark as logged in; replace with real flow later
-        localStorage.setItem("pcLoggedIn", "true");
-        renderNavRight();
-      });
-    }
+    right.innerHTML = `<a href="/pages/signin.html" class="signin-btn" aria-label="Sign In">Sign In</a>`;
   }
 }

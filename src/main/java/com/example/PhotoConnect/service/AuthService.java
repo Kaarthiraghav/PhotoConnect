@@ -131,6 +131,20 @@ public class AuthService {
     }
 
     @Transactional
+    public String verifyEmailByCodeAndLogin(String code) {
+        User user = userRepository.findByVerificationCode(code)
+                .orElseThrow(() -> new RuntimeException("Invalid or expired verification link"));
+
+        if (!user.isEnabled()) {
+            user.setEnabled(true);
+        }
+        user.setVerificationCode(null);
+        userRepository.save(user);
+
+        return jwtTokenProvider.generateTokenForEmail(user.getEmail());
+    }
+
+    @Transactional
     public void forgotPassword(ForgotPasswordRequest request) {
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -156,5 +170,22 @@ public class AuthService {
         user.setResetToken(null);
         user.setResetTokenExpiry(null);
         userRepository.save(user);
+    }
+
+    @Transactional
+    public String resendVerificationEmail(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        if (user.isEnabled()) {
+            return "User already verified";
+        }
+        String code = user.getVerificationCode();
+        if (code == null || code.isBlank()) {
+            code = UUID.randomUUID().toString();
+            user.setVerificationCode(code);
+            userRepository.save(user);
+        }
+        emailService.sendVerificationEmail(user.getEmail(), code);
+        return "Verification email sent";
     }
 }
