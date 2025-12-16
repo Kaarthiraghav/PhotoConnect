@@ -21,14 +21,14 @@ public class ChatService {
         this.chatMessageRepository = chatMessageRepository;
     }
 
-    // 1️⃣ Create a new chat room
+    //  Create a new chat room
     public ChatRoom createChatRoom(String roomName) {
         ChatRoom room = new ChatRoom();
         room.setName(roomName);
         return (ChatRoom) chatRoomRepository.save(room);
     }
 
-    // 2️⃣ Save a new message
+    //  Save a new message
     public ChatMessage saveMessage(Long chatRoomId, String senderId, String content) {
         Optional<ChatRoom> optionalRoom = chatRoomRepository.findById(chatRoomId);
         if (optionalRoom.isEmpty()) {
@@ -44,12 +44,12 @@ public class ChatService {
         return (ChatMessage) chatMessageRepository.save(message);
     }
 
-    // 3️⃣ Fetch messages for a room
+    //  Fetch messages for a room
     public List<ChatMessage> getMessagesForRoom(Long chatRoomId) {
         return chatMessageRepository.findByChatRoomId(chatRoomId);
     }
 
-    // 4️⃣ List all chat rooms (optional)
+    //  List all chat rooms (optional)
     public List<ChatRoom> getAllChatRooms() {
         return chatRoomRepository.findAll();
     }
