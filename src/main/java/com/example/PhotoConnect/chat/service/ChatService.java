@@ -55,7 +55,7 @@ public class ChatService {
      */
     public List<ChatMessage> getMessagesForBooking(Long bookingId) {
         ChatRoom chatRoom = getOrCreateChatRoom(bookingId);
-        return chatMessageRepository.findByChatRoomId(chatRoom.getId());
+        return chatMessageRepository.findByChatRoomIdOrderByTimestampAsc(chatRoom.getId());
     }
 
     /**
