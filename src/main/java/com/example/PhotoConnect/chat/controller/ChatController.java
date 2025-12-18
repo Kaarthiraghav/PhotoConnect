@@ -1,9 +1,9 @@
 package com.example.PhotoConnect.chat.controller;
 
-
 import com.example.PhotoConnect.chat.entity.ChatMessage;
 import com.example.PhotoConnect.chat.entity.ChatRoom;
 import com.example.PhotoConnect.chat.service.ChatService;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -21,24 +21,40 @@ public class ChatController {
         this.chatService = chatService;
     }
 
-    //  Create a chat room
+    // Create or get a chat room (Fixed the casting issue from your snippet)
     @PostMapping("/room")
     public ChatRoom createChatRoom(@RequestParam String name) {
-        return chatService.createChatRoom(name);
+        return chatService.getOrCreateChatRoom(Long.valueOf(name));
     }
 
-    //  Get messages for a chat room
+    // Get messages for a chat room
     @GetMapping("/room/{roomId}/messages")
     public List<ChatMessage> getMessages(@PathVariable Long roomId) {
-        return chatService.getMessagesForRoom(roomId);
+        return chatService.getMessagesForBooking(roomId);
     }
 
-    //  WebSocket: Send message
+    // WebSocket: Send message to a general topic
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/chat")
     public ChatMessage sendMessage(@Payload ChatMessage message) {
         return chatService.saveMessage(
                 message.getChatRoom().getId(),
+                message.getSenderId(),
+                message.getContent()
+        );
+    }
+
+
+     //NEW: Handle messages for a specific booking/room ID
+     // The {bookingId} is extracted using @DestinationVariable
+    @MessageMapping("/chat/{bookingId}")
+    @SendTo("/topic/chat/{bookingId}")
+    public ChatMessage sendBookingMessage(@DestinationVariable Long bookingId, @Payload ChatMessage message) {
+        // Ensure the room exists before saving the message
+        chatService.getOrCreateChatRoom(bookingId);
+
+        return chatService.saveMessage(
+                bookingId,
                 message.getSenderId(),
                 message.getContent()
         );

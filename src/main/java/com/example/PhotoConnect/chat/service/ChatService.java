@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ChatService {
@@ -16,27 +15,34 @@ public class ChatService {
     private final ChatRoomRepository chatRoomRepository;
     private final ChatMessageRepository chatMessageRepository;
 
-    public ChatService(ChatRoomRepository chatRoomRepository, ChatMessageRepository chatMessageRepository) {
+    public ChatService(ChatRoomRepository chatRoomRepository,
+                       ChatMessageRepository chatMessageRepository) {
         this.chatRoomRepository = chatRoomRepository;
         this.chatMessageRepository = chatMessageRepository;
     }
 
-    //  Create a new chat room
-    public ChatRoom createChatRoom(String roomName) {
-        ChatRoom room = new ChatRoom();
-        room.setName(roomName);
-        return (ChatRoom) chatRoomRepository.save(room);
+    /**
+     * Get existing chat room for a booking
+     * or create one if it does not exist
+     */
+    public ChatRoom getOrCreateChatRoom(Long bookingId) {
+        return (ChatRoom) chatRoomRepository.findByBookingId(bookingId)
+                .orElseGet(() -> {
+                    ChatRoom room = new ChatRoom(bookingId);
+                    room.setName("Booking-" + bookingId);
+                    return chatRoomRepository.save(room);
+                });
     }
 
-    //  Save a new message
-    public ChatMessage saveMessage(Long chatRoomId, String senderId, String content) {
-        Optional<ChatRoom> optionalRoom = chatRoomRepository.findById(chatRoomId);
-        if (optionalRoom.isEmpty()) {
-            throw new RuntimeException("Chat room not found");
-        }
+    /**
+     * Save a new message to a booking-based chat room
+     */
+    public ChatMessage saveMessage(Long bookingId, String senderId, String content) {
+
+        ChatRoom chatRoom = getOrCreateChatRoom(bookingId);
 
         ChatMessage message = new ChatMessage();
-        message.setChatRoom(optionalRoom.get());
+        message.setChatRoom(chatRoom);
         message.setSenderId(senderId);
         message.setContent(content);
         message.setTimestamp(LocalDateTime.now());
@@ -44,13 +50,18 @@ public class ChatService {
         return (ChatMessage) chatMessageRepository.save(message);
     }
 
-    //  Fetch messages for a room
-    public List<ChatMessage> getMessagesForRoom(Long chatRoomId) {
-        return chatMessageRepository.findByChatRoomId(chatRoomId);
+    /**
+     * Fetch all messages for a booking
+     */
+    public List<ChatMessage> getMessagesForBooking(Long bookingId) {
+        ChatRoom chatRoom = getOrCreateChatRoom(bookingId);
+        return chatMessageRepository.findByChatRoomId(chatRoom.getId());
     }
 
-    //  List all chat rooms (optional)
-    public List<ChatRoom> getAllChatRooms() {
+    /**
+     * (Optional) Admin / debug use
+     */
+    public List<ChatRoom> getAllChatRooms(String name) {
         return chatRoomRepository.findAll();
     }
 }
