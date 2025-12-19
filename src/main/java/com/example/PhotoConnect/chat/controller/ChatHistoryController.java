@@ -21,4 +21,18 @@ public class ChatHistoryController {
     public List<ChatMessage> getChatHistory(@PathVariable Long bookingId) {
         return chatService.getMessagesForBooking(bookingId);
     }
+
+    @PostMapping("/read/{bookingId}")
+    public void markAsRead(
+            @PathVariable Long bookingId,
+            @RequestParam String userId
+    ) {
+        chatService.markMessagesAsRead(bookingId, userId);
+    }
+
+    @GetMapping("/unread-count/{bookingId}")
+    public long getUnreadCount(@PathVariable Long bookingId) {
+        return chatService.getUnreadCount(bookingId);
+    }
+
 }

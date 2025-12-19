@@ -21,4 +21,8 @@ public class ChatMessage {
     @ManyToOne
     @JoinColumn(name = "chat_room_id")
     private ChatRoom chatRoom;
+
+    @Column(nullable = false)
+    private boolean isRead = false;
+
 }

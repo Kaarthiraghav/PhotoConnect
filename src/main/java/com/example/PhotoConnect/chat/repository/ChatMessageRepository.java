@@ -9,5 +9,11 @@ public interface ChatMessageRepository<ChatMessage> extends JpaRepository<ChatMe
 
     List<ChatMessage> findByChatRoomId(Long chatRoomId);
     List<ChatMessage> findByChatRoomIdOrderByTimestampAsc(Long chatRoomId);
+    long countByChatRoomIdAndIsReadFalse(Long chatRoomId);
+
+    List<ChatMessage> findByChatRoomIdAndSenderIdNotAndIsReadFalse(
+            Long chatRoomId, String senderId
+    );
+
 
 }

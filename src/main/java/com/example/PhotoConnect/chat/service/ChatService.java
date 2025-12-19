@@ -64,4 +64,22 @@ public class ChatService {
     public List<ChatRoom> getAllChatRooms(String name) {
         return chatRoomRepository.findAll();
     }
+
+    public void markMessagesAsRead(Long bookingId, String currentUserId) {
+        ChatRoom chatRoom = getOrCreateChatRoom(bookingId);
+
+        List<ChatMessage> unreadMessages =
+                chatMessageRepository.findByChatRoomIdAndSenderIdNotAndIsReadFalse(
+                        chatRoom.getId(), currentUserId
+                );
+
+        unreadMessages.forEach(msg -> msg.setRead(true));
+        chatMessageRepository.saveAll(unreadMessages);
+    }
+
+    public long getUnreadCount(Long bookingId) {
+        ChatRoom chatRoom = getOrCreateChatRoom(bookingId);
+        return chatMessageRepository.countByChatRoomIdAndIsReadFalse(chatRoom.getId());
+    }
+
 }
