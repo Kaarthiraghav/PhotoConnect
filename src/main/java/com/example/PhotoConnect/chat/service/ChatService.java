@@ -2,9 +2,12 @@ package com.example.PhotoConnect.chat.service;
 
 import com.example.PhotoConnect.chat.entity.ChatMessage;
 import com.example.PhotoConnect.chat.entity.ChatRoom;
+import com.example.PhotoConnect.chat.event.ChatMessageEvent;
 import com.example.PhotoConnect.chat.repository.ChatMessageRepository;
 import com.example.PhotoConnect.chat.repository.ChatRoomRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.context.ApplicationEventPublisher;
+
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,9 +19,10 @@ public class ChatService {
     private final ChatMessageRepository chatMessageRepository;
 
     public ChatService(ChatRoomRepository chatRoomRepository,
-                       ChatMessageRepository chatMessageRepository) {
+                       ChatMessageRepository chatMessageRepository, ApplicationEventPublisher eventPublisher) {
         this.chatRoomRepository = chatRoomRepository;
         this.chatMessageRepository = chatMessageRepository;
+        this.eventPublisher = eventPublisher;
     }
 
     /**
@@ -47,7 +51,10 @@ public class ChatService {
         message.setContent(content);
         message.setTimestamp(LocalDateTime.now());
 
-        return (ChatMessage) chatMessageRepository.save(message);
+        ChatMessage savedMessage = (ChatMessage) chatMessageRepository.save(message);
+        eventPublisher.publishEvent(new ChatMessageEvent(savedMessage));
+        return savedMessage;
+
     }
 
     /**
@@ -81,5 +88,7 @@ public class ChatService {
         ChatRoom chatRoom = getOrCreateChatRoom(bookingId);
         return chatMessageRepository.countByChatRoomIdAndIsReadFalse(chatRoom.getId());
     }
+
+    private final ApplicationEventPublisher eventPublisher;
 
 }
