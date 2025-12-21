@@ -1,8 +1,10 @@
 package com.example.PhotoConnect.chat.controller;
 
+import com.example.PhotoConnect.chat.dto.ChatMessageDto;
 import com.example.PhotoConnect.chat.entity.ChatMessage;
 import com.example.PhotoConnect.chat.entity.ChatRoom;
 import com.example.PhotoConnect.chat.service.ChatService;
+import jakarta.validation.Valid;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -36,13 +38,18 @@ public class ChatController {
     // WebSocket: Send message to a general topic
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/chat")
-    public ChatMessage sendMessage(@Payload ChatMessage message) {
+    public ChatMessage sendMessage(
+            @DestinationVariable Long bookingId,
+            @Valid ChatMessageDto messageDto
+    ) {
         return chatService.saveMessage(
-                message.getChatRoom().getId(),
-                message.getSenderId(),
-                message.getContent()
+                bookingId,
+                messageDto.getSenderId(),
+                messageDto.getContent()
         );
     }
+
+
 
 
      //NEW: Handle messages for a specific booking/room ID
