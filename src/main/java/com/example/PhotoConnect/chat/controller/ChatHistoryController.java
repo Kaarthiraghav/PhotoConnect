@@ -35,4 +35,15 @@ public class ChatHistoryController {
         return chatService.getUnreadCount(bookingId);
     }
 
+    @PostMapping("/delivered/{bookingId}")
+    public void markAsDelivered(
+            @PathVariable Long bookingId,
+            @RequestParam String userId
+    ) {
+        chatService.markMessagesAsDelivered(bookingId, userId);
+    }
+
+
+
+
 }

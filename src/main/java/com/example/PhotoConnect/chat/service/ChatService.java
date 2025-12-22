@@ -51,8 +51,11 @@ public class ChatService {
         message.setContent(content);
         message.setTimestamp(LocalDateTime.now());
 
+        message.setDeliveryStatus(ChatMessage.DeliveryStatus.SENT);
+
         ChatMessage savedMessage = (ChatMessage) chatMessageRepository.save(message);
         eventPublisher.publishEvent(new ChatMessageEvent(savedMessage));
+
         return savedMessage;
 
     }
@@ -91,4 +94,18 @@ public class ChatService {
 
     private final ApplicationEventPublisher eventPublisher;
 
+    public void markMessagesAsDelivered(Long bookingId, String currentUserId) {
+        ChatRoom chatRoom = getOrCreateChatRoom(bookingId);
+
+        List<ChatMessage> unreadMessages =
+                chatMessageRepository.findByChatRoomIdAndSenderIdNotAndIsReadFalse(
+                        chatRoom.getId(), currentUserId
+                );
+
+        unreadMessages.forEach(msg -> msg.setDeliveryStatus(ChatMessage.DeliveryStatus.DELIVERED));
+        chatMessageRepository.saveAll(unreadMessages);
+    }
+
+
 }
+

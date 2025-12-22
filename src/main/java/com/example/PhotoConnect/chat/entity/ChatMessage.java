@@ -25,4 +25,13 @@ public class ChatMessage {
     @Column(nullable = false)
     private boolean isRead = false;
 
+    public enum DeliveryStatus {
+        SENT,
+        DELIVERED
+    }
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private DeliveryStatus deliveryStatus = DeliveryStatus.SENT;
+
 }
