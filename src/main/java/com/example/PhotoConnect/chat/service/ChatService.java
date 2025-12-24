@@ -105,6 +105,10 @@ public class ChatService {
         unreadMessages.forEach(msg -> msg.setDeliveryStatus(ChatMessage.DeliveryStatus.DELIVERED));
         chatMessageRepository.saveAll(unreadMessages);
     }
+    public void markRoomAsRead(Long roomId, String userId) {
+        // Intentionally left blank
+        // Unread reset logic will be implemented on Day 15
+    }
 
 
 }

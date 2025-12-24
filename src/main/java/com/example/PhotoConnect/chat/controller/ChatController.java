@@ -5,6 +5,7 @@ import com.example.PhotoConnect.chat.entity.ChatMessage;
 import com.example.PhotoConnect.chat.entity.ChatRoom;
 import com.example.PhotoConnect.chat.service.ChatService;
 import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -50,8 +51,6 @@ public class ChatController {
     }
 
 
-
-
      //NEW: Handle messages for a specific booking/room ID
      // The {bookingId} is extracted using @DestinationVariable
     @MessageMapping("/chat/{bookingId}")
@@ -66,4 +65,15 @@ public class ChatController {
                 message.getContent()
         );
     }
+    @PostMapping("/rooms/{roomId}/read")
+    public ResponseEntity<Void> markRoomAsRead(
+            @PathVariable Long roomId,
+            @RequestParam String userId
+    ) {
+        chatService.markRoomAsRead(roomId, userId);
+        return ResponseEntity.ok().build();
+    }
+
+
+
 }
