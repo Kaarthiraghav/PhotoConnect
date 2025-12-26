@@ -1,5 +1,6 @@
 package com.example.PhotoConnect.chat.event;
 
+import com.example.PhotoConnect.chat.entity.ChatMessage;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
@@ -7,8 +8,15 @@ import org.springframework.stereotype.Component;
 public class ChatMessageEventListener {
 
     @EventListener
-    public void handleChatMessage(ChatMessageEvent event) {
-        // Later Dev 10 will connect this to Notifications service
-        System.out.println("New chat message event triggered");
+    public void handleChatMessageEvent(ChatMessageEvent event) {
+        ChatMessage message = event.getMessage();
+
+        // This is where real-time updates will be triggered
+        // (WebSocket / notification layer in future days)
+
+        System.out.println(
+                "New message event received for room: "
+                        + message.getChatRoom().getId()
+        );
     }
 }

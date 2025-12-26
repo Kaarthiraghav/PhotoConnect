@@ -46,7 +46,7 @@ public class ChatService {
     }
 
     /* ---------------------------------------------------
-       Message Send (Day 15: unread increment)
+       Message Send (unread increment)
     --------------------------------------------------- */
 
     public ChatMessage saveMessage(Long bookingId, String senderId, String content) {
@@ -62,7 +62,7 @@ public class ChatService {
 
         ChatMessage savedMessage = (ChatMessage) chatMessageRepository.save(message);
 
-        // 🔹 DAY 15: increment unread count
+        // increment unread count
         incrementUnreadCount(chatRoom, senderId);
 
         // WebSocket / event
@@ -72,7 +72,7 @@ public class ChatService {
     }
 
     /* ---------------------------------------------------
-       Unread Logic (Day 15)
+       Unread Logic
     --------------------------------------------------- */
 
     private void incrementUnreadCount(ChatRoom chatRoom, String senderId) {
@@ -131,7 +131,7 @@ public class ChatService {
     }
 
     /* ---------------------------------------------------
-       Delivery Status (used Day 16)
+       Delivery Status
     --------------------------------------------------- */
 
     public void markMessagesAsDelivered(Long bookingId, String currentUserId) {
