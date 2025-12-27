@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface UnreadMessageRepository extends JpaRepository<UnreadMessage, Long> {
 
     Optional<UnreadMessage> findByChatRoomIdAndUserId(Long chatRoomId, String userId);
+
+    void incrementUnreadCount(Long id, String senderId);
 }
