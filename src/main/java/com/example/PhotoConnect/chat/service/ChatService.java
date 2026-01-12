@@ -113,7 +113,7 @@ public class ChatService {
         return unreadMessageRepository
                 .findByChatRoomIdAndUserId(chatRoom.getId(), "CURRENT_USER")
                 .map(UnreadMessage::getUnreadCount)
-                .orElse(0L);
+                .orElse(Math.toIntExact(0L));
     }
 
     /* ---------------------------------------------------
@@ -148,5 +148,9 @@ public class ChatService {
         );
 
         chatMessageRepository.saveAll(unreadMessages);
+    }
+
+    public void markMessagesAsRead(Long bookingId, String userId) {
+
     }
 }

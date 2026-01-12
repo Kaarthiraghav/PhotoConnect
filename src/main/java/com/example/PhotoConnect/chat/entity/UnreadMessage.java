@@ -1,24 +1,48 @@
 package com.example.PhotoConnect.chat.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
 @Entity
-@Table(name = "unread_messages")
+@Table(
+        name = "unread_messages",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"chat_room_id", "user_id"})
+        }
+)
 public class UnreadMessage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "chat_room_id", nullable = false)
-    private ChatRoom chatRoom;
+    @Setter
+    @Column(name = "chat_room_id", nullable = false)
+    private Long chatRoomId;
 
-    @Column(nullable = false)
+    @Setter
+    @Column(name = "user_id", nullable = false)
     private String userId;
 
-    @Column(nullable = false)
-    private long unreadCount;
+    @Setter
+    @Column(name = "unread_count", nullable = false)
+    private int unreadCount = 0;
+
+    // ---------- Constructors ----------
+
+    public UnreadMessage() {
+    }
+
+    public UnreadMessage(Long chatRoomId, String userId) {
+        this.chatRoomId = chatRoomId;
+        this.userId = userId;
+        this.unreadCount = 0;
+    }
+
+    // ---------- Getters & Setters ----------
+
+    public void setChatRoom(ChatRoom chatRoom) {
+    }
 }
