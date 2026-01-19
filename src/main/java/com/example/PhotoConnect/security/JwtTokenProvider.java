@@ -57,6 +57,12 @@ public class JwtTokenProvider {
         return createToken(claims, userDetails.getUsername());
     }
 
+    // Generate a token directly from a username/email (for magic links)
+    public String generateTokenForEmail(String email) {
+        Map<String, Object> claims = new HashMap<>();
+        return createToken(claims, email);
+    }
+
     private String createToken(Map<String, Object> claims, String subject) {
         return Jwts.builder()
             .claims(claims)

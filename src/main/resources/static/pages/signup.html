@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/design.css">
 </head>
 
 <body>
@@ -26,20 +26,20 @@
         <div class="create-account-section">
             <h3>Create Account</h3>
 
-            <form>
+            <form id="signup-form">
                 <div class="input-group">
                     <i class="fas fa-user"></i>
-                    <input type="text" placeholder="Name">
+                    <input type="text" id="username" placeholder="Name" required>
                 </div>
 
                 <div class="input-group">
-                    <i class="fas fa-email"></i>
-                    <input type="email" placeholder="Email">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" placeholder="Email" required>
                 </div>
 
                 <div class="input-group">
                     <i class="fas fa-lock"></i>
-                    <input type="password" placeholder="Password">
+                    <input type="password" id="password" placeholder="Password" required>
                 </div>
 
                 <button type="submit" class="sign-up-btn">SIGN UP</button>
@@ -51,6 +51,7 @@
 
 <div id="footer"></div>
 <script src="/js/footer.js"></script>
+<script src="/js/auth.js"></script>
 
 </body>
 </html>

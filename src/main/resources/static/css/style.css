@@ -1,190 +1,130 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
     background-color: #f0f2f5;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     min-height: 100vh;
+    margin: 0;
 }
 
 .page-container {
-    flex-grow: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 50px 0;
+    width: 100%;
 }
 
-.signup-form-container {
-    display: flex;
-    width: 800px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    overflow: hidden;
+.signin-form-container, .signup-form-container {
     background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    overflow: hidden;
+    width: 768px;
+    max-width: 100%;
+    min-height: 480px;
+    display: flex;
 }
 
-
-.welcome-section {
-    width: 40%;
-    background: black;
-    color: white;
-    padding: 40px;
+.signin-section, .create-account-section {
+    flex: 1;
+    padding: 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    position: relative;
-    overflow: hidden;
 }
 
-.logo {
-    font-weight: 700;
-    font-size: 1.5em;
-    position: absolute;
-    top: 20px;
-    left: 20px;
-}
-
-.welcome-section h2 {
-    font-size: 2em;
-    margin-bottom: 10px;
-}
-
-.welcome-section p {
-    font-weight: 300;
-    margin-bottom: 30px;
-}
-
-.sign-in-btn {
-    background: transparent;
-    border: 2px solid white;
+.hello-friend-section, .welcome-section {
+    flex: 1;
+    background: linear-gradient(to right, #ff4b2b, #ff416c);
     color: white;
-    padding: 10px 30px;
-    border-radius: 20px;
-    font-weight: 500;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    transition: background-color 0.3s;
-}
-
-.sign-in-btn:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Create Account Section (Right Panel) */
-.create-account-section {
-    width: 60%;
-    padding: 40px;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
 }
 
-.create-account-section h3 {
-    color: black;
-    font-size: 2em;
-    margin-top: 0;
+h2 {
     margin-bottom: 20px;
 }
 
-
 .input-group {
-    background-color: #f0f2f5;
-    border-radius: 5px;
+    position: relative;
     margin-bottom: 15px;
-    padding: 10px;
-    display: flex;
-    align-items: center;
+    width: 100%;
 }
 
 .input-group i {
-    color: #999;
-    margin-right: 10px;
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
 }
 
 .input-group input {
+    width: 100%;
+    padding: 12px 15px 12px 40px;
+    background-color: #eee;
     border: none;
-    background: transparent;
+    border-radius: 5px;
     outline: none;
-    flex-grow: 1;
-    padding: 5px 0;
 }
 
-.sign-up-btn {
-    background-color: black;
-    color: white;
-    border: none;
-    padding: 12px 50px;
+button {
     border-radius: 20px;
-    margin-top: 10px;
-    font-size: 1em;
-    font-weight: 500;
+    border: 1px solid #ff4b2b;
+    background-color: #ff4b2b;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
     cursor: pointer;
-    transition: background-color 0.3s;
+    margin-top: 20px;
 }
 
-.sign-up-btn:hover {
-    background-color: #333;
+button:active {
+    transform: scale(0.95);
 }
 
-.footer {
-            background-color: #000000;
-            color: #cccccc;
-            padding: 40px 80px;
-            font-family: 'Playfair Display', serif;
-        }
+button:focus {
+    outline: none;
+}
 
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+button.ghost {
+    background-color: transparent;
+    border-color: #ffffff;
+}
 
-        .contact-info {
-            flex: 1;
-            min-width: 200px;
-        }
+.sign-up-btn, .sign-in-btn {
+    text-decoration: none;
+    color: white;
+    border: 1px solid white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    margin-top: 20px;
+    display: inline-block;
+}
 
-        .brand {
-            font-size: 1.5em;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: white;
-        }
+.sign-in-btn-main {
+     /* specific style if needed */
+}
 
-        .contact-info p {
-            margin: 5px 0;
-            font-size: 0.9em;
-        }
+.logo-dippella, .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    margin-bottom: 30px;
+    color: #333;
+}
 
-        .contact-info i {
-            margin-right: 10px;
-            width: 16px;
-            text-align: center;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 100px;
-            flex: 2;
-            justify-content: flex-end;
-        }
-
-        .nav-links, .career-links {
-            line-height: 1.8;
-        }
-
-        .footer-links a {
-            color: #cccccc;
-            text-decoration: none;
-            transition: color 0.3s;
-            font-size: 0.9em;
-        }
-
-        .footer-links a:hover {
-            color: white;
-        }
+.hello-friend-section .logo {
+    color: white;
+}

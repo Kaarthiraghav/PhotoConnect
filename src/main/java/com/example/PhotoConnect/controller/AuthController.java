@@ -11,6 +11,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -85,6 +86,26 @@ public class AuthController {
         }
     }
 
+    // Magic-link verification: verifies the code and auto-logs in the user
+    @GetMapping(value = "/verify-email/{code}")
+    public ResponseEntity<String> verifyEmailMagicLink(@PathVariable String code) {
+        try {
+            String token = authService.verifyEmailByCodeAndLogin(code);
+            String html = "<!doctype html><html><body><script>" +
+                    "localStorage.setItem('token','" + token + "');" +
+                    "window.location.href='/index.html';" +
+                    "</script></body></html>";
+            return ResponseEntity.ok().contentType(MediaType.TEXT_HTML).body(html);
+        } catch (RuntimeException e) {
+            String html = "<!doctype html><html><body>" +
+                    "<p>Verification failed: " + e.getMessage() + "</p>" +
+                    "</body></html>";
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .contentType(MediaType.TEXT_HTML)
+                    .body(html);
+        }
+    }
+
     @PostMapping("/forgot-password")
     public ResponseEntity<?> forgotPassword(@Valid @RequestBody ForgotPasswordRequest request) {
         try {
@@ -110,6 +131,22 @@ public class AuthController {
         } catch (RuntimeException e) {
             Map<String, String> error = new HashMap<>();
             error.put("error", "Reset failed");
+            error.put("message", e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+        }
+    }
+
+    @PostMapping("/resend-verification")
+    public ResponseEntity<?> resendVerification(@RequestBody Map<String, String> payload) {
+        try {
+            String email = payload.get("email");
+            String message = authService.resendVerificationEmail(email);
+            Map<String, String> response = new HashMap<>();
+            response.put("message", message);
+            return ResponseEntity.ok(response);
+        } catch (RuntimeException e) {
+            Map<String, String> error = new HashMap<>();
+            error.put("error", "Resend failed");
             error.put("message", e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
         }
