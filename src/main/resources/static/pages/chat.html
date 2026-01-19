@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chat - PhotoConnect</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <style>
+    .chat-container{display:flex;gap:16px;padding:20px}
+    .chat-sidebar{width:300px;border-right:1px solid #ddd;padding-right:12px}
+    .chat-main{flex:1;display:flex;flex-direction:column;height:70vh}
+    .messages{flex:1;overflow:auto;padding:12px;border:1px solid #eee;border-radius:6px;background:#fff}
+    .message{margin-bottom:8px}
+    .message.me{text-align:right}
+    .composer{display:flex;gap:8px;margin-top:12px}
+    .composer input[type=text]{flex:1;padding:8px}
+    .room-controls{display:flex;gap:8px;margin-bottom:12px}
+  </style>
+</head>
+<body>
+  <div id="navbar"></div>
+
+  <main class="chat-container">
+    <aside class="chat-sidebar">
+      <h3>Join a Chat</h3>
+      <div class="room-controls">
+        <input id="bookingId" type="text" placeholder="Booking ID" />
+        <button id="joinBtn">Join</button>
+      </div>
+      <label for="userId">Your user id (senderId)</label>
+      <input id="userId" type="text" placeholder="your-user-id" />
+
+      <h4 style="margin-top:16px">Active Room</h4>
+      <div id="currentRoom">None</div>
+    </aside>
+
+    <section class="chat-main">
+      <div class="messages" id="messages" aria-live="polite"></div>
+
+      <div class="composer">
+        <input id="messageInput" type="text" placeholder="Type a message..." />
+        <button id="sendBtn">Send</button>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="/js/navbar.js"></script>
+  <script src="/js/footer.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.0.0/bundles/stomp.umd.min.js"></script>
+  <script type="module" src="/js/chat.js"></script>
+</body>
+</html>

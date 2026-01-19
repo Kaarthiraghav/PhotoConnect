@@ -26,20 +26,20 @@
         <div class="create-account-section">
             <h3>Create Account</h3>
 
-            <form id="signup-form">
+            <form id="signupForm">
                 <div class="input-group">
                     <i class="fas fa-user"></i>
-                    <input type="text" id="username" placeholder="Name" required>
+                    <input id="signupName" type="text" name="name" placeholder="Name" required>
                 </div>
 
                 <div class="input-group">
-                    <i class="fas fa-envelope"></i>
-                    <input type="email" id="email" placeholder="Email" required>
+                    <i class="fas fa-email"></i>
+                    <input id="signupEmail" type="email" name="email" placeholder="Email" required>
                 </div>
 
                 <div class="input-group">
                     <i class="fas fa-lock"></i>
-                    <input type="password" id="password" placeholder="Password" required>
+                    <input id="signupPassword" type="password" name="password" placeholder="Password" required>
                 </div>
 
                 <button type="submit" class="sign-up-btn">SIGN UP</button>
@@ -51,7 +51,7 @@
 
 <div id="footer"></div>
 <script src="/js/footer.js"></script>
-<script src="/js/auth.js"></script>
+<script type="module" src="/js/auth.js"></script>
 
 </body>
 </html>
