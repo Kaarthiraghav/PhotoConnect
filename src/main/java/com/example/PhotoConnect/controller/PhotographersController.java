@@ -15,6 +15,7 @@ import java.util.Map;
 @CrossOrigin
 public class PhotographersController {
 
+    // TODO: Replace hardcoded data with actual database queries
     @GetMapping("/top")
     public List<Map<String, Object>> topPhotographers() {
         List<Map<String, Object>> list = new ArrayList<>();

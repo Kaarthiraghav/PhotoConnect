@@ -85,6 +85,7 @@ function sendMessage() {
   const userId = document.getElementById('userId').value.trim();
   const text = input.value.trim();
   if (!currentRoomId) { alert('Join a room first'); return; }
+  if (!userId) { alert('Please enter your user ID'); return; }
   if (!text) return;
   const payload = { senderId: userId, content: text };
   try {

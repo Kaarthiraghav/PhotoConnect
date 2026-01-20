@@ -7,12 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (signupForm) {
         signupForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const name = document.getElementById('signupName').value.trim();
+            const username = document.getElementById('signupName').value.trim();
             const email = document.getElementById('signupEmail').value.trim();
             const password = document.getElementById('signupPassword').value;
 
             try {
-                const res = await registerUser({ name, email, password });
+                const res = await registerUser({ username, email, password });
                 if (res && res.message) {
                     alert('Registered: ' + res.message);
                     window.location.href = '/pages/signin.html';
@@ -37,8 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             try {
                 const res = await loginUser({ email, password });
-                if (res && res.accessToken) {
-                    localStorage.setItem('authToken', res.accessToken);
+                if (res && res.token) {
+                    localStorage.setItem('token', res.token);
                     alert('Logged in');
                     window.location.href = '/';
                 } else if (res && res.error) {

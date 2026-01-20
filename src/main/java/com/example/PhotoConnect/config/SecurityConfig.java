@@ -50,6 +50,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                     .requestMatchers("/api/auth/**").permitAll()
                     .requestMatchers("/api/photographers/**").permitAll()
+                    .requestMatchers("/ws-chat/**").permitAll()
+                    .requestMatchers("/api/chat/**").authenticated()
                     .requestMatchers("/", "/index.html").permitAll()
                     .requestMatchers("/css/**", "/js/**", "/images/**", "/components/**", "/pages/**").permitAll()
                     .requestMatchers("/api/admin/**").hasRole("ADMIN")
@@ -66,9 +68,10 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:8080", "http://localhost:3000"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowedOriginPatterns(Arrays.asList("http://localhost:*"));
         configuration.setExposedHeaders(Arrays.asList("Authorization"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
