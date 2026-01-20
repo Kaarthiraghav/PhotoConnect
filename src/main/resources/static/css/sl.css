@@ -1,0 +1,8 @@
+:root {
+  --drop-shadow-600: 0px 16px 32px -8px rgba(12, 12, 13, 0.4);
+  --size-space-400: 16px;
+  --size-space-800: 32px;
+  --size-space-4000: 160px;
+  --color-border-default-default: var(--color-primitives-gray-300);
+  --color-primitives-gray-300: rgba(217, 217, 217, 1);
+}
