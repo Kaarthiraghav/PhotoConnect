@@ -1,6 +1,6 @@
-package com.example.booking_service.repository;
+package com.example.PhotoConnect.booking.repository;
 
-import com.example.booking_service.model.Booking;
+import com.example.PhotoConnect.booking.model.Booking;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BookingRepository extends JpaRepository<Booking, Long> {

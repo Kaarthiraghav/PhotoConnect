@@ -1,8 +1,8 @@
-package com.example.booking_service.service;
+package com.example.PhotoConnect.booking.service;
 
-import com.example.booking_service.model.Booking;
-import com.example.booking_service.model.BookingStatus;
-import com.example.booking_service.repository.BookingRepository;
+import com.example.PhotoConnect.booking.model.Booking;
+import com.example.PhotoConnect.booking.model.BookingStatus;
+import com.example.PhotoConnect.booking.repository.BookingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.example.booking_service.model;
+package com.example.PhotoConnect.booking.model;
 
 public enum BookingStatus {
     PENDING,
