@@ -1,7 +1,7 @@
-package com.example.booking_service.controller;
+package com.example.PhotoConnect.booking.controller;
 
-import com.example.booking_service.model.Booking;
-import com.example.booking_service.service.BookingService;
+import com.example.PhotoConnect.booking.model.Booking;
+import com.example.PhotoConnect.booking.service.BookingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
