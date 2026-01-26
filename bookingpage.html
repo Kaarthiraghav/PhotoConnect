@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Photographer - PhotoConnect</title>
+    <link rel="stylesheet" href="bookingpage.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">PhotoConnect</div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#photographers">Photographers</a>
+            <a href="#about">About Us</a>
+            <a href="#contact">Contact Us</a>
+        </nav>
+        <div class="auth-buttons">
+            <button class="btn btn-outline">Sign In</button>
+            <button class="btn btn-primary">Sign Up</button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1 class="page-title">Book Your Photographer</h1>
+        <p class="page-subtitle">Fill in the details below to complete your booking</p>
+
+        <div id="successMessage" class="success-message">
+            ✓ Booking submitted successfully! We'll contact you shortly.
+        </div>
+
+        <div class="booking-container">
+            <!-- Booking Form -->
+            <div class="booking-form">
+                <form id="bookingForm">
+                    <!-- Event Details -->
+                    <div class="form-section">
+                        <h2 class="section-title">Event Details</h2>
+                        
+                        <div class="form-group">
+                            <label for="eventName">Event Name <span class="required">*</span></label>
+                            <input type="text" id="eventName" name="eventName" placeholder="e.g., Wedding Ceremony, Birthday Party" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="eventType">Event Type <span class="required">*</span></label>
+                            <select id="eventType" name="eventType" required>
+                                <option value="">Select event type</option>
+                                <option value="wedding">Wedding</option>
+                                <option value="birthday">Birthday Party</option>
+                                <option value="corporate">Corporate Event</option>
+                                <option value="portrait">Portrait Session</option>
+                                <option value="family">Family Event</option>
+                                <option value="graduation">Graduation</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="eventDate">Event Date <span class="required">*</span></label>
+                                <input type="date" id="eventDate" name="eventDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="eventTime">Event Time <span class="required">*</span></label>
+                                <input type="time" id="eventTime" name="eventTime" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="duration">Duration (hours) <span class="required">*</span></label>
+                            <input type="number" id="duration" name="duration" min="1" max="12" placeholder="e.g., 4" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="venue">Venue <span class="required">*</span></label>
+                            <input type="text" id="venue" name="venue" placeholder="Enter venue address" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="guestCount">Expected Guest Count</label>
+                            <input type="number" id="guestCount" name="guestCount" min="1" placeholder="e.g., 50">
+                        </div>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="form-section">
+                        <h2 class="section-title">Contact Information</h2>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name <span class="required">*</span></label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name <span class="required">*</span></label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number <span class="required">*</span></label>
+                            <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567" required>
+                        </div>
+                    </div>
+
+                    <!-- Additional Information -->
+                    <div class="form-section">
+                        <h2 class="section-title">Additional Information</h2>
+                        
+                        <div class="form-group">
+                            <label for="specialRequests">Special Requests or Notes</label>
+                            <textarea id="specialRequests" name="specialRequests" placeholder="Any specific requirements, locations for photos, or special moments you'd like captured..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="referencePhotos">How did you hear about us?</label>
+                            <select id="referredBy" name="referredBy">
+                                <option value="">Select an option</option>
+                                <option value="google">Google Search</option>
+                                <option value="social">Social Media</option>
+                                <option value="friend">Friend/Family</option>
+                                <option value="previous">Previous Client</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Booking Summary -->
+            <div class="booking-summary">
+                <div class="photographer-info">
+                    <div class="photographer-avatar"></div>
+                    <div class="photographer-name">Alex Johnson</div>
+                    <div class="photographer-specialty">Wedding Photography</div>
+                </div>
+
+                <div class="summary-details">
+                    <div class="summary-item">
+                        <span class="summary-label">Hourly Rate</span>
+                        <span class="summary-value">$150/hr</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Duration</span>
+                        <span class="summary-value" id="summaryDuration">- hours</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Date</span>
+                        <span class="summary-value" id="summaryDate">Not selected</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Time</span>
+                        <span class="summary-value" id="summaryTime">Not selected</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Venue</span>
+                        <span class="summary-value" id="summaryVenue">Not specified</span>
+                    </div>
+                </div>
+
+                <div class="total-section">
+                    <div class="total-item">
+                        <span class="total-label">Subtotal</span>
+                        <span class="summary-value" id="subtotal">$0</span>
+                    </div>
+                    <div class="total-item">
+                        <span class="total-label">Service Fee (10%)</span>
+                        <span class="summary-value" id="serviceFee">$0</span>
+                    </div>
+                    <div class="total-item" style="margin-top: 15px; padding-top: 15px; border-top: 2px solid #333;">
+                        <span class="total-label">Total</span>
+                        <span class="total-amount" id="totalAmount">$0</span>
+                    </div>
+                </div>
+
+                <div class="submit-section">
+                    <button type="submit" form="bookingForm" class="btn-submit">Confirm Booking</button>
+                    <p class="terms-text">
+                        By booking, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>PhotoConnect</h3>
+                <p class="contact-info">
+                    📧 info@photoconnect.com<br>
+                    📱 +94 (77) 123 - 456<br>
+                    📍 Colombo, Sri Lanka
+                </p>
+                <div class="social-links">
+                    <a href="#">@PhotoConnect</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Find Photographers</a></li>
+                    <li><a href="#">Become a Photographer</a></li>
+                    <li><a href="#">How it Works</a></li>
+                    <li><a href="#">Pricing</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="bookingpage.js"></script>
+</body>
+</html>
