@@ -1,6 +1,6 @@
-package com.example.searchservice.service;
+package com.example.PhotoConnect.search.service;
 
-import com.example.searchservice.entity.Event;
+import com.example.PhotoConnect.search.entity.Event;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
