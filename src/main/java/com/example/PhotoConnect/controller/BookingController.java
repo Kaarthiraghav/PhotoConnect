@@ -53,5 +53,15 @@ public class BookingController {
     public List<Booking> getAll() {
         return bookingService.getAllBookings();
     }
+
+    @GetMapping("/client/{clientId}")
+    public List<Booking> getClientBookings(@PathVariable Long clientId) {
+        return bookingService.getClientBookings(clientId);
+    }
+
+    @GetMapping("/photographer/{photographerId}")
+    public List<Booking> getPhotographerBookings(@PathVariable Long photographerId) {
+        return bookingService.getPhotographerBookings(photographerId);
+    }
 }
 

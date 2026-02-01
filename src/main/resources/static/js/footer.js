@@ -19,17 +19,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div>
                     <h3>Follow Us</h3>
                     <ul>
-                        <li><a href="#">Facebook</a></li>
-                        <li><a href="#">Twitter</a></li>
-                        <li><a href="#">Instagram</a></li>
+                        <li><a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a></li>
+                        <li><a href="https://twitter.com" target="_blank" rel="noopener">Twitter</a></li>
+                        <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
                     </ul>
                 </div>
                 <div>
                     <h3>Support</h3>
                     <ul>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="/pages/contact_us.html">FAQ</a></li>
+                        <li><a href="/pages/contact_us.html">Privacy Policy</a></li>
+                        <li><a href="/pages/contact_us.html">Terms of Service</a></li>
                     </ul>
                 </div>
             </footer>

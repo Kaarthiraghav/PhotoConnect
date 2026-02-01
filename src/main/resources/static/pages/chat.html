@@ -5,41 +5,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Chat - PhotoConnect</title>
   <link rel="stylesheet" href="/css/site.css" />
-  <style>
-    .chat-container{display:flex;gap:16px;padding:20px}
-    .chat-sidebar{width:300px;border-right:1px solid #ddd;padding-right:12px}
-    .chat-main{flex:1;display:flex;flex-direction:column;height:70vh}
-    .messages{flex:1;overflow:auto;padding:12px;border:1px solid #eee;border-radius:6px;background:#fff}
-    .message{margin-bottom:8px}
-    .message.me{text-align:right}
-    .composer{display:flex;gap:8px;margin-top:12px}
-    .composer input[type=text]{flex:1;padding:8px}
-    .room-controls{display:flex;gap:8px;margin-bottom:12px}
-  </style>
+  <link rel="stylesheet" href="/css/chat.css" />
 </head>
 <body>
   <div id="navbar"></div>
 
   <main class="chat-container">
     <aside class="chat-sidebar">
-      <h3>Join a Chat</h3>
-      <div class="room-controls">
-        <input id="bookingId" type="text" placeholder="Booking ID" />
-        <button id="joinBtn">Join</button>
+      <div class="chat-card">
+        <div class="chat-card__header">
+          <h3>Join a Chat</h3>
+          <p class="chat-muted">Enter booking and user IDs</p>
+        </div>
+        <div class="room-controls">
+          <label for="bookingId">Booking ID</label>
+          <div class="chat-input-row">
+            <input id="bookingId" type="text" placeholder="e.g., 1024" />
+            <button id="joinBtn" class="btn-primary">Join</button>
+          </div>
+        </div>
+        <div class="room-controls">
+          <label for="userId">Your user ID (senderId)</label>
+          <input id="userId" type="text" placeholder="your-user-id" />
+        </div>
       </div>
-      <label for="userId">Your user id (senderId)</label>
-      <input id="userId" type="text" placeholder="your-user-id" />
 
-      <h4 style="margin-top:16px">Active Room</h4>
-      <div id="currentRoom">None</div>
+      <div class="chat-card chat-card--compact">
+        <h4>Active Room</h4>
+        <div class="room-pill" id="currentRoom">None</div>
+        <div class="chat-muted">Messages will appear in real-time.</div>
+      </div>
     </aside>
 
     <section class="chat-main">
+      <header class="chat-header">
+        <div>
+          <h2>Chat Room</h2>
+          <div class="chat-muted">Secure messaging for your booking</div>
+        </div>
+        <div class="chat-status">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span class="status-text">Connected</span>
+        </div>
+      </header>
+
       <div class="messages" id="messages" aria-live="polite"></div>
 
       <div class="composer">
         <input id="messageInput" type="text" placeholder="Type a message..." />
-        <button id="sendBtn">Send</button>
+        <button id="sendBtn" class="btn-primary">Send</button>
       </div>
     </section>
   </main>

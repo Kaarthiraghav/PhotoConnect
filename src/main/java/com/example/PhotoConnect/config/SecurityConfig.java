@@ -49,6 +49,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> auth
                     .requestMatchers("/api/auth/**").permitAll()
+                    .requestMatchers("/submit-photographer-profile").permitAll()
                     .requestMatchers("/api/photographers/**").permitAll()
                     .requestMatchers("/ws-chat/**").permitAll()
                     .requestMatchers("/api/chat/**").authenticated()

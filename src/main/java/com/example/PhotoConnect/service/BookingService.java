@@ -57,6 +57,14 @@ public class BookingService {
         return bookingRepository.findAll();
     }
 
+    public List<Booking> getClientBookings(Long clientId) {
+        return bookingRepository.findByClientId(clientId);
+    }
+
+    public List<Booking> getPhotographerBookings(Long photographerId) {
+        return bookingRepository.findByPhotographerId(photographerId);
+    }
+
     private Booking getBooking(Long id) {
         return bookingRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Booking not found"));

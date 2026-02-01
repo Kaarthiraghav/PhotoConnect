@@ -27,6 +27,10 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    private String location;
+    private Double hourlyRate = 0.0;
+    private String profilePhoto;
+
     @Column(nullable = false)
     private boolean enabled = true;
 
