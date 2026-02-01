@@ -1,4 +1,4 @@
-package com.example.PhotoConnect.search.entity;
+package com.example.PhotoConnect.model;
 
 import jakarta.persistence.*;
 import lombok.*;

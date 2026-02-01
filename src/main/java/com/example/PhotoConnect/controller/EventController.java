@@ -1,8 +1,9 @@
-package com.example.PhotoConnect.search.controller;
+package com.example.PhotoConnect.controller;
 
 
-import com.example.PhotoConnect.search.entity.Event;
-import com.example.PhotoConnect.search.service.EventService;
+import com.example.PhotoConnect.model.Event;
+import com.example.PhotoConnect.service.EventService;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;

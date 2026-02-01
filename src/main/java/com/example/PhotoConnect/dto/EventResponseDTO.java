@@ -1,4 +1,4 @@
-package com.example.PhotoConnect.search.dto;
+package com.example.PhotoConnect.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

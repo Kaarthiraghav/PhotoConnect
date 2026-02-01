@@ -1,7 +1,8 @@
-package com.example.PhotoConnect.search.repository;
+package com.example.PhotoConnect.repository;
 
-import com.example.PhotoConnect.search.entity.Event;
 import org.springframework.data.jpa.domain.Specification;
+
+import com.example.PhotoConnect.model.Event;
 
 public class EventSpecification {
 

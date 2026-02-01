@@ -1,8 +1,9 @@
-package com.example.PhotoConnect.search.service;
+package com.example.PhotoConnect.service;
 
-import com.example.PhotoConnect.search.entity.Event;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import com.example.PhotoConnect.model.Event;
 
 public interface EventService {
 
