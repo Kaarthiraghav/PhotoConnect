@@ -49,6 +49,7 @@ public class AdminUserService {
 
     // Get user by ID
     public UserResponseDTO getUserById(Long id) {
+        @SuppressWarnings("null")
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
         return convertToDTO(user);
@@ -93,6 +94,7 @@ public class AdminUserService {
 
     // Toggle user status
     public UserResponseDTO toggleUserStatus(Long id) {
+        @SuppressWarnings("null")
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 

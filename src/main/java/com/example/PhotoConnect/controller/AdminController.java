@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/admin")
 public class AdminController {
 
+    @SuppressWarnings("unused")
     @Autowired
     private AdminService adminService;
 
