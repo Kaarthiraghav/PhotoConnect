@@ -1,6 +1,6 @@
 package com.example.PhotoConnect.config;
 
-import com.example.PhotoConnect.entity.Admin;
+import com.example.PhotoConnect.model.Admin;
 import com.example.PhotoConnect.repository.AdminRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;

@@ -11,4 +11,8 @@ import java.util.Optional;
 public interface PhotographerProfileRepository extends JpaRepository<PhotographerProfile, Long> {
     // Custom method to find the profile by the Photographer's User ID
     Optional<PhotographerProfile> findByUserId(Long userId);
+
+    long countByVerifiedTrue();
+
+    long countByVerifiedFalse();
 }

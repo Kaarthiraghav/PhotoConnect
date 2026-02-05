@@ -7,4 +7,8 @@ import java.util.List;
 
 public interface BookingRepository extends JpaRepository<Booking, Long> {
     List<Booking> findByClientId(Long clientId);
-    List<Booking> findByPhotographerId(Long photographerId);}
+
+    List<Booking> findByPhotographerId(Long photographerId);
+
+    long countByEventDateAfter(java.time.LocalDateTime date);
+}
