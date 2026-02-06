@@ -62,7 +62,7 @@ async function loadTopPhotographers() {
 }
 
 document
-  .getElementById("findPhotographerBtn")
+  .querySelector(".hero-btn")
   ?.addEventListener("click", () => {
     window.location.href = "/pages/photographers.html";
   });

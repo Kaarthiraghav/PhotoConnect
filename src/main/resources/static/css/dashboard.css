@@ -25,20 +25,20 @@ body {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.nav-content {
+.header .nav-content {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 1rem 0;
 }
 
-.logo-section {
+.header .logo-section {
     display: flex;
     align-items: center;
     gap: 0.75rem;
 }
 
-.logo {
+.header .logo {
     width: 40px;
     height: 40px;
     background: #111827;
@@ -51,28 +51,28 @@ body {
     font-size: 1.125rem;
 }
 
-.brand-name {
+.header .brand-name {
     font-size: 1.25rem;
     font-weight: 600;
 }
 
-.nav-links {
+.header .nav-links {
     display: flex;
     gap: 2rem;
     font-size: 0.875rem;
 }
 
-.nav-links a {
+.header .nav-links a {
     color: #111827;
     text-decoration: none;
     transition: color 0.2s;
 }
 
-.nav-links a:hover {
+.header .nav-links a:hover {
     color: #6b7280;
 }
 
-.sign-in-btn {
+.header .sign-in-btn {
     background: #111827;
     color: white;
     border: none;
@@ -83,7 +83,7 @@ body {
     transition: background 0.2s;
 }
 
-.sign-in-btn:hover {
+.header .sign-in-btn:hover {
     background: #374151;
 }
 

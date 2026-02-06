@@ -3,56 +3,72 @@ fetch("/components/navbar.html")
   .then((html) => {
     document.getElementById("navbar").innerHTML = html;
     // After injecting markup, render right side depending on auth state
-    try {
-      const navRight = document.getElementById("nav-right");
-      const token =
-        localStorage.getItem("authToken") || localStorage.getItem("token");
-      if (token) {
-        // Logged-in UI: bell + avatar
-        const avatarUrl =
-          localStorage.getItem("avatarUrl") || "/images/default-avatar.png";
-        navRight.innerHTML = `
-          <div class="nav-controls">
-            <button class="icon-btn bell" aria-label="Notifications">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 17H9a3 3 0 0 0 6 0z" stroke="#000" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 8a6 6 0 10-12 0c0 7-3 7-3 7h18s-3 0-3-7" stroke="#000" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <span class="notif-badge">1</span>
-            </button>
-            <div class="avatar-wrap">
-              <img src="${avatarUrl}" alt="User avatar" class="avatar" />
-            </div>
-          </div>`;
-      } else {
-        // Not logged-in: keep Sign In button behavior
-        navRight.innerHTML = `<button class="signin-btn" aria-label="Sign In">Sign In</button>`;
-      }
-
-function renderNavRight() {
-  const right = document.getElementById("navRight");
-  if (!right) return;
-
-  const token = localStorage.getItem("token");
-  
-  if (token) {
-    right.innerHTML = `
-      <button class="icon-btn" id="notifBtn" aria-label="Notifications">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M18 8a6 6 0 10-12 0c0 7-3 8-3 8h18s-3-1-3-8"/>
-          <path d="M13.73 21a2 2 0 01-3.46 0"/>
-        </svg>
-        <span class="badge">1</span>
-      </button>
-      <div class="user-menu">
-        <img class="avatar" src="https://i.pravatar.cc/64?img=12" alt="User" id="userAvatar"/>
-        <button id="logoutBtn" class="logout-btn">Logout</button>
-      </div>
-    `;
+    const navRight = document.getElementById("nav-right");
+    const token = localStorage.getItem("token");
     
-    document.getElementById('logoutBtn').addEventListener('click', () => {
-        localStorage.removeItem('token');
-        window.location.href = '/pages/signin.html';
-    });
+    if (token) {
+      // Logged-in UI: bell + avatar + logout
+      const avatarUrl =
+        localStorage.getItem("avatarUrl") || "/images/default-avatar.png";
+      navRight.innerHTML = `
+        <div class="nav-controls">
+          <button class="icon-btn bell" aria-label="Notifications">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 17H9a3 3 0 0 0 6 0z" stroke="#000" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 8a6 6 0 10-12 0c0 7-3 7-3 7h18s-3 0-3-7" stroke="#000" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="notif-badge">1</span>
+          </button>
+          <button class="avatar-btn" aria-label="Open dashboard">
+            <span class="avatar-wrap">
+              <img src="${avatarUrl}" alt="User avatar" class="avatar" />
+            </span>
+          </button>
+          <button class="logout-btn" aria-label="Log Out">Log Out</button>
+        </div>`;
+    } else {
+      // Not logged-in: keep Sign In button behavior
+      navRight.innerHTML = `<button class="signin-btn" aria-label="Sign In">Sign In</button>`;
+    }
 
-  } else {
-    right.innerHTML = `<a href="/pages/signin.html" class="signin-btn" aria-label="Sign In">Sign In</a>`;
-  }
-}
+    // Add event listeners for Sign In button
+    const signInBtn = document.querySelector(".signin-btn");
+    if (signInBtn) {
+      signInBtn.addEventListener("click", () => {
+        window.location.href = "/pages/signin.html";
+      });
+    }
+
+    const avatarBtn = document.querySelector(".avatar-btn");
+    if (avatarBtn) {
+      avatarBtn.addEventListener("click", async () => {
+        try {
+          const res = await fetch("/api/users/me", {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          if (!res.ok) throw new Error("Failed to load user");
+          const user = await res.json();
+          const role = (user.role || "").toUpperCase();
+          if (role.includes("ADMIN")) {
+            window.location.href = "/pages/dashboards/admin.html";
+          } else if (role.includes("PHOTOGRAPHER")) {
+            window.location.href = "/pages/dashboards/photographer.html";
+          } else {
+            window.location.href = "/pages/dashboards/client.html";
+          }
+        } catch (err) {
+          console.error("Failed to redirect to dashboard", err);
+          window.location.href = "/pages/dashboards/client.html";
+        }
+      });
+    }
+
+    const logoutBtn = document.querySelector(".logout-btn");
+    if (logoutBtn) {
+      logoutBtn.addEventListener("click", () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("avatarUrl");
+        window.location.href = "/index.html";
+      });
+    }
+  })
+  .catch((err) => {
+    console.error("Failed to load navbar:", err);
+  });
