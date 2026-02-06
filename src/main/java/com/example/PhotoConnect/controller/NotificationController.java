@@ -1,8 +1,8 @@
-package com.example.PhotoConnect.Notification.controller;
+package com.example.PhotoConnect.controller;
 
-import com.example.PhotoConnect.Notification.entity.Notification;
-import com.example.PhotoConnect.Notification.security.UserPrincipal;
-import com.example.PhotoConnect.Notification.service.NotificationService;
+import com.example.PhotoConnect.model.Notification;
+import com.example.PhotoConnect.security.UserPrincipal;
+import com.example.PhotoConnect.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

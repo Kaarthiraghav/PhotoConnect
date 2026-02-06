@@ -1,4 +1,4 @@
-package com.example.PhotoConnect.Notification.entity;
+package com.example.PhotoConnect.model;
 
 public enum UserRole {
     CLIENT,

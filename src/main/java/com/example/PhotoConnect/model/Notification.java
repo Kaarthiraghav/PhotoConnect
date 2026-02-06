@@ -1,4 +1,4 @@
-package com.example.PhotoConnect.Notification.entity;
+package com.example.PhotoConnect.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -18,7 +18,7 @@ public class Notification {
     private Long userId;
 
     @Enumerated(EnumType.STRING)
-    private com.example.PhotoConnect.Notification.entity.UserRole userRole; // CLIENT, PHOTOGRAPHER, ADMIN
+    private UserRole userRole; // CLIENT, PHOTOGRAPHER, ADMIN
 
     private String title;
 
@@ -26,7 +26,7 @@ public class Notification {
     private String message;
 
     @Enumerated(EnumType.STRING)
-    private com.example.PhotoConnect.Notification.entity.NotificationType type; // BOOKING, PAYMENT, CHAT, REVIEW, SYSTEM
+    private NotificationType type; // BOOKING, PAYMENT, CHAT, REVIEW, SYSTEM
 
     private boolean isRead = false;
 

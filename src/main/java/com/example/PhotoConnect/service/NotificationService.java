@@ -1,9 +1,9 @@
-package com.example.PhotoConnect.Notification.service;
+package com.example.PhotoConnect.service;
 
-import com.example.PhotoConnect.Notification.entity.Notification;
-import com.example.PhotoConnect.Notification.entity.NotificationType;
-import com.example.PhotoConnect.Notification.entity.UserRole;
-import com.example.PhotoConnect.Notification.repo.NotificationRepository;
+import com.example.PhotoConnect.model.Notification;
+import com.example.PhotoConnect.model.NotificationType;
+import com.example.PhotoConnect.model.UserRole;
+import com.example.PhotoConnect.repository.NotificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;

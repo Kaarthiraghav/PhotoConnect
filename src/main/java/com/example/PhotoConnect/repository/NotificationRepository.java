@@ -1,6 +1,6 @@
-package com.example.PhotoConnect.Notification.repo;
+package com.example.PhotoConnect.repository;
 
-import com.example.PhotoConnect.Notification.entity.Notification;
+import com.example.PhotoConnect.model.Notification;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

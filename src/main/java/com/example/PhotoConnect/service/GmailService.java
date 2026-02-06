@@ -1,4 +1,4 @@
-package com.example.PhotoConnect.Notification.service;
+package com.example.PhotoConnect.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;

@@ -1,4 +1,4 @@
-package com.example.PhotoConnect.Notification.security;
+package com.example.PhotoConnect.security;
 
 public class UserPrincipal {
 
