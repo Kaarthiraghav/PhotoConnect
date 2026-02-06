@@ -1,7 +1,7 @@
-package com.example.PhotoConnect.userprofile.controller;
+package com.example.PhotoConnect.controller;
 
-import com.example.PhotoConnect.userprofile.model.PhotographerProfile;
-import com.example.PhotoConnect.userprofile.service.PhotographerProfileService;
+import com.example.PhotoConnect.model.PhotographerProfile;
+import com.example.PhotoConnect.service.PhotographerProfileService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

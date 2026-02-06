@@ -1,6 +1,6 @@
-package com.example.PhotoConnect.userprofile.repository;
+package com.example.PhotoConnect.repository;
 
-import com.example.PhotoConnect.userprofile.model.PhotographerProfile;
+import com.example.PhotoConnect.model.PhotographerProfile;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

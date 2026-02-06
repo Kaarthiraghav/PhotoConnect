@@ -1,7 +1,7 @@
-package com.example.PhotoConnect.userprofile.service;
+package com.example.PhotoConnect.service;
 
-import com.example.PhotoConnect.userprofile.model.ClientProfile;
-import com.example.PhotoConnect.userprofile.repository.ClientProfileRepository;
+import com.example.PhotoConnect.model.ClientProfile;
+import com.example.PhotoConnect.repository.ClientProfileRepository;
 import org.springframework.stereotype.Service;
 
 @Service

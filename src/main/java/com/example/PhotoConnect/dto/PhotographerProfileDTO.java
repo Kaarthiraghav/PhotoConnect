@@ -1,4 +1,4 @@
-package com.example.PhotoConnect.userprofile.dto;
+package com.example.PhotoConnect.dto;
 
 public class PhotographerProfileDTO {
 

@@ -1,4 +1,4 @@
-package com.example.PhotoConnect.userprofile.model;
+package com.example.PhotoConnect.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
