@@ -89,21 +89,19 @@ public class AuthController {
 
     // Magic-link verification: verifies the code and auto-logs in the user
     @GetMapping(value = "/verify-email/{code}")
-    public ResponseEntity<String> verifyEmailMagicLink(@PathVariable String code) {
+    public ResponseEntity<?> verifyEmailMagicLink(@PathVariable String code) {
         try {
             String token = authService.verifyEmailByCodeAndLogin(code);
-            String html = "<!doctype html><html><body><script>" +
-                    "localStorage.setItem('token','" + token + "');" +
-                    "window.location.href='/index.html';" +
-                    "</script></body></html>";
-                return ResponseEntity.ok().contentType(Objects.requireNonNull(MediaType.TEXT_HTML)).body(html);
+            Map<String, String> response = new HashMap<>();
+            response.put("token", token);
+            response.put("type", "Bearer");
+            response.put("message", "Email verified successfully");
+            return ResponseEntity.ok(response);
         } catch (RuntimeException e) {
-            String html = "<!doctype html><html><body>" +
-                    "<p>Verification failed: " + e.getMessage() + "</p>" +
-                    "</body></html>";
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .contentType(Objects.requireNonNull(MediaType.TEXT_HTML))
-                    .body(html);
+            Map<String, String> error = new HashMap<>();
+            error.put("error", "Verification failed");
+            error.put("message", e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
         }
     }
 

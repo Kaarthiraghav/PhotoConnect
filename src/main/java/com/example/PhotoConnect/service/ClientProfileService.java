@@ -19,7 +19,8 @@ public class ClientProfileService {
     }
 
     public ClientProfile getByUserId(Long userId) {
-        return repo.findByUserId(userId).orElse(null);
+        return repo.findByUserId(userId)
+                .orElseThrow(() -> new RuntimeException("Client profile not found for user ID: " + userId));
     }
 }
 

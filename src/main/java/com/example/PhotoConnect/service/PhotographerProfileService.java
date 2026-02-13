@@ -19,7 +19,8 @@ public class PhotographerProfileService {
     }
 
     public PhotographerProfiles getByUserId(Long userId) {
-        return repo.findByUserId(userId).orElse(null);
+        return repo.findByUserId(userId)
+                .orElseThrow(() -> new RuntimeException("Photographer profile not found for user ID: " + userId));
     }
 }
 

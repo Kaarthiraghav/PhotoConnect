@@ -32,8 +32,11 @@ public class ChatHistoryController {
     }
 
     @GetMapping("/unread-count/{bookingId}")
-    public long getUnreadCount(@PathVariable Long bookingId) {
-        return chatService.getUnreadCount(bookingId);
+    public long getUnreadCount(
+            @PathVariable Long bookingId,
+            @RequestParam String userId
+    ) {
+        return chatService.getUnreadCount(bookingId, userId);
     }
 
     @PostMapping("/delivered/{bookingId}")

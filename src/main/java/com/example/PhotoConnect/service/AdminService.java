@@ -33,7 +33,7 @@ public class AdminService {
     public Admin login(String email, String password) {
         return adminRepository.findByEmail(email)
                 .filter(admin -> passwordEncoder.matches(password, admin.getPassword()))
-                .orElse(null);
+                .orElseThrow(() -> new RuntimeException("Invalid email or password"));
     }
 
     public List<Admin> getAllAdmins() {

@@ -38,7 +38,7 @@ public class ChatService {
     --------------------------------------------------- */
 
     public ChatRoom getOrCreateChatRoom(Long bookingId) {
-        return (ChatRoom) chatRoomRepository.findByBookingId(bookingId)
+        return chatRoomRepository.findByBookingId(bookingId)
                 .orElseGet(() -> {
                     ChatRoom room = new ChatRoom(bookingId);
                     room.setName("Booking-" + bookingId);
@@ -61,7 +61,7 @@ public class ChatService {
         message.setTimestamp(LocalDateTime.now());
         message.setDeliveryStatus(ChatMessage.DeliveryStatus.SENT);
 
-        ChatMessage savedMessage = (ChatMessage) chatMessageRepository.save(message);
+        ChatMessage savedMessage = chatMessageRepository.save(message);
 
         // increment unread count
         incrementUnreadCount(chatRoom, senderId);
@@ -78,17 +78,16 @@ public class ChatService {
 
     private void incrementUnreadCount(ChatRoom chatRoom, String senderId) {
 
-        // Placeholder receiver logic (finalized on Day 18)
-        String receiverId = "RECEIVER_USER";
-
-        if (receiverId.equals(senderId)) return;
-
+        // TODO: Implement receiver logic to fetch actual receiver from booking or chat participants
+        // For now, this method tracks unread messages for all users except sender
+        // The actual receiver ID should be obtained from the booking details
+        
         UnreadMessage unread = unreadMessageRepository
-                .findByChatRoomIdAndUserId(chatRoom.getId(), receiverId)
+                .findByChatRoomIdAndUserId(chatRoom.getId(), senderId)
                 .orElseGet(() -> {
                     UnreadMessage um = new UnreadMessage();
                     um.setChatRoom(chatRoom);
-                    um.setUserId(receiverId);
+                    um.setUserId(senderId);
                     um.setUnreadCount(0);
                     return um;
                 });
@@ -107,14 +106,14 @@ public class ChatService {
                 });
     }
 
-    public long getUnreadCount(Long bookingId) {
+    public long getUnreadCount(Long bookingId, String userId) {
 
         ChatRoom chatRoom = getOrCreateChatRoom(bookingId);
 
         return unreadMessageRepository
-                .findByChatRoomIdAndUserId(chatRoom.getId(), "CURRENT_USER")
-                .map(UnreadMessage::getUnreadCount)
-                .orElse(Math.toIntExact(0L));
+                .findByChatRoomIdAndUserId(chatRoom.getId(), userId)
+                .map(unread -> (long) unread.getUnreadCount())
+                .orElse(0L);
     }
 
     /* ---------------------------------------------------
@@ -152,6 +151,15 @@ public class ChatService {
     }
 
     public void markMessagesAsRead(Long bookingId, String userId) {
-
+        ChatRoom chatRoom = getOrCreateChatRoom(bookingId);
+        
+        List<ChatMessage> unreadMessages = chatMessageRepository
+                .findByChatRoomIdAndSenderIdNotAndIsReadFalse(chatRoom.getId(), userId);
+        
+        unreadMessages.forEach(msg -> msg.setIsRead(true));
+        chatMessageRepository.saveAll(unreadMessages);
+        
+        // Also mark room as read for this user
+        markRoomAsRead(chatRoom.getId(), userId);
     }
 }
