@@ -53,7 +53,7 @@ public class SecurityConfig {
                     .requestMatchers("/api/photographers/**").permitAll()
                     .requestMatchers("/ws-chat/**").permitAll()
                     .requestMatchers("/api/chat/**").authenticated()
-                    .requestMatchers("/", "/index.html").permitAll()
+                    .requestMatchers("/", "/index.html", "/login").permitAll()
                     .requestMatchers("/css/**", "/js/**", "/images/**", "/components/**", "/pages/**").permitAll()
                     .requestMatchers("/api/admin/**").hasRole("ADMIN")
                     .requestMatchers("/api/photographer/**").hasAnyRole("PHOTOGRAPHER", "ADMIN")

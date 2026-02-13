@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -95,13 +96,13 @@ public class AuthController {
                     "localStorage.setItem('token','" + token + "');" +
                     "window.location.href='/index.html';" +
                     "</script></body></html>";
-            return ResponseEntity.ok().contentType(MediaType.TEXT_HTML).body(html);
+                return ResponseEntity.ok().contentType(Objects.requireNonNull(MediaType.TEXT_HTML)).body(html);
         } catch (RuntimeException e) {
             String html = "<!doctype html><html><body>" +
                     "<p>Verification failed: " + e.getMessage() + "</p>" +
                     "</body></html>";
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .contentType(MediaType.TEXT_HTML)
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .contentType(Objects.requireNonNull(MediaType.TEXT_HTML))
                     .body(html);
         }
     }

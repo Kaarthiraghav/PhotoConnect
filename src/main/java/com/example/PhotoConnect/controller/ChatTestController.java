@@ -2,6 +2,8 @@ package com.example.PhotoConnect.controller;
 
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.lang.NonNull;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/chat/test")
@@ -16,11 +18,11 @@ public class ChatTestController {
     @PostMapping("/{roomId}")
     public void testSend(
             @PathVariable Long roomId,
-            @RequestParam String message
+            @RequestParam @NonNull String message
     ) {
         messagingTemplate.convertAndSend(
                 "/topic/chat/" + roomId,
-                message
+                Objects.requireNonNull(message)
         );
     }
 }

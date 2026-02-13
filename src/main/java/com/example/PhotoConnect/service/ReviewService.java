@@ -8,6 +8,8 @@ import com.example.PhotoConnect.repository.ReviewBookingRepository;
 import com.example.PhotoConnect.repository.ReviewRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
+import java.util.Objects;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,7 +28,7 @@ public class ReviewService {
     @Transactional
     public Review submitReview(Review review) {
         // 1. BUSINESS LOGIC: Check if Booking exists and is COMPLETED
-        ReviewBooking booking = bookingRepository.findById(review.getBookingId())
+        ReviewBooking booking = bookingRepository.findById(Objects.requireNonNull(review.getBookingId()))
                 .orElseThrow(() -> new RuntimeException("Booking not found"));
 
         if (!"COMPLETED".equalsIgnoreCase(booking.getStatus())) {
@@ -36,15 +38,16 @@ public class ReviewService {
         // 2. SET METADATA
         review.setCreatedAt(LocalDateTime.now());
         review.setFlagged(false);
-        Review savedReview = reviewRepository.save(review);
+        Review savedReview = Objects.requireNonNull(reviewRepository.save(review));
 
         // 3. AGGREGATE RATING: Update PhotographerProfile table
-        updatePhotographerStats(review.getPhotographerId());
+        updatePhotographerStats(Objects.requireNonNull(review.getPhotographerId()));
 
         return savedReview;
     }
 
-    private void updatePhotographerStats(Long photographerId) {
+    private void updatePhotographerStats(@NonNull Long photographerId) {
+        Objects.requireNonNull(photographerId);
         Double avg = reviewRepository.getAverageRating(photographerId);
         Long count = reviewRepository.countByPhotographerId(photographerId);
 
@@ -57,10 +60,12 @@ public class ReviewService {
     }
 
     public List<Review> getReviewsForPhotographer(Long photographerId) {
+        Objects.requireNonNull(photographerId);
         return reviewRepository.findByPhotographerIdAndIsFlaggedFalseOrderByCreatedAtDesc(photographerId);
     }
 
     public Map<String, Object> getPhotographerStats(Long photographerId) {
+        Objects.requireNonNull(photographerId);
         PhotographerProfile profile = profileRepository.findByUserId(photographerId)
                 .orElseThrow(() -> new RuntimeException("Profile not found"));
 
@@ -72,12 +77,13 @@ public class ReviewService {
 
     @Transactional
     public void flagReview(Long id) {
+        Objects.requireNonNull(id);
         Review review = reviewRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Review not found"));
+            .orElseThrow(() -> new RuntimeException("Review not found"));
         review.setFlagged(true);
         reviewRepository.save(review);
 
         // Recalculate stats after a review is hidden
-        updatePhotographerStats(review.getPhotographerId());
+        updatePhotographerStats(Objects.requireNonNull(review.getPhotographerId()));
     }
 }

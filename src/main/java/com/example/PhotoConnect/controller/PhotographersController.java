@@ -6,8 +6,10 @@ import com.example.PhotoConnect.repository.PhotographerProfileRepository;
 import com.example.PhotoConnect.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.lang.NonNull;
 
 import java.util.*;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RestController
@@ -39,14 +41,16 @@ public class PhotographersController {
     }
 
     @GetMapping("/{id}")
-    public Map<String, Object> getPhotographerById(@PathVariable Long id) {
+    public Map<String, Object> getPhotographerById(@PathVariable @NonNull Long id) {
+        Objects.requireNonNull(id);
         PhotographerProfile profile = photographerProfileRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Photographer not found"));
         return photographerToMap(profile);
     }
 
     @GetMapping("/user/{userId}")
-    public Map<String, Object> getPhotographerByUserId(@PathVariable Long userId) {
+    public Map<String, Object> getPhotographerByUserId(@PathVariable @NonNull Long userId) {
+        Objects.requireNonNull(userId);
         PhotographerProfile profile = photographerProfileRepository.findByUserId(userId)
                 .orElseThrow(() -> new RuntimeException("Photographer profile not found"));
         return photographerToMap(profile);
@@ -54,7 +58,7 @@ public class PhotographersController {
 
     private Map<String, Object> photographerToMap(PhotographerProfile profile) {
         Map<String, Object> m = new HashMap<>();
-        User user = userRepository.findById(profile.getUserId()).orElse(null);
+        User user = userRepository.findById(Objects.requireNonNull(profile.getUserId())).orElse(null);
         
         m.put("id", profile.getId());
         m.put("userId", profile.getUserId());
