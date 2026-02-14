@@ -48,7 +48,7 @@ Repo - https://github.com/Kaarthiraghav/PhotoConnect
 -   Spring Boot
 -   Spring Security
 -   Spring Data JPA (Hibernate)
--   MySQL / H2 Database
+-   MySQL
 -   Maven
 
 ------------------------------------------------------------------------
