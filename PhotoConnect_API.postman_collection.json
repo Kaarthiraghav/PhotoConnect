@@ -1,0 +1,2078 @@
+{
+	"info": {
+		"_postman_id": "photoconnect-api-collection",
+		"name": "PhotoConnect API",
+		"description": "Complete API collection for PhotoConnect - Photography Booking Platform",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "1. Authentication",
+			"item": [
+				{
+					"name": "Register Client",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"client@example.com\",\n  \"username\": \"JohnDoe\",\n  \"password\": \"password123\",\n  \"role\": \"CLIENT\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/register",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "auth", "register"]
+						}
+					}
+				},
+				{
+					"name": "Register Photographer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"photographer@example.com\",\n  \"username\": \"JaneSmith\",\n  \"password\": \"password123\",\n  \"role\": \"PHOTOGRAPHER\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/register",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "auth", "register"]
+						}
+					}
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"if (jsonData.token) {",
+									"    pm.environment.set(\"token\", jsonData.token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"client@example.com\",\n  \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/login",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "auth", "login"]
+						}
+					}
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/logout",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "auth", "logout"]
+						}
+					}
+				},
+				{
+					"name": "Verify Email (POST)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"code\": \"verification-code-here\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/verify-email",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "auth", "verify-email"]
+						}
+					}
+				},
+				{
+					"name": "Verify Email (GET - Magic Link)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/verify-email/:code",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "auth", "verify-email", ":code"],
+							"variable": [
+								{
+									"key": "code",
+									"value": "verification-code-here"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Forgot Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"client@example.com\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/forgot-password",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "auth", "forgot-password"]
+						}
+					}
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"token\": \"reset-token-here\",\n  \"newPassword\": \"newPassword123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/reset-password",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "auth", "reset-password"]
+						}
+					}
+				},
+				{
+					"name": "Resend Verification",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"client@example.com\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/resend-verification",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "auth", "resend-verification"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "2. Users",
+			"item": [
+				{
+					"name": "Get Current User",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/me",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "users", "me"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "3. Photographers",
+			"item": [
+				{
+					"name": "Get All Photographers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/photographers",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "photographers"]
+						}
+					}
+				},
+				{
+					"name": "Get Top Photographers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/photographers/top",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "photographers", "top"]
+						}
+					}
+				},
+				{
+					"name": "Get Photographer by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/photographers/:id",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "photographers", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Photographer by User ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/photographers/user/:userId",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "photographers", "user", ":userId"],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "4. Photographer Profile",
+			"item": [
+				{
+					"name": "Create Photographer Profile",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userId\": 1,\n  \"studioName\": \"John's Photography\",\n  \"bio\": \"Professional photographer with 10 years experience\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/photographer/profile",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "photographer", "profile"]
+						}
+					}
+				},
+				{
+					"name": "Get Photographer Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/photographer/profile/:userId",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "photographer", "profile", ":userId"],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "5. Client Profile",
+			"item": [
+				{
+					"name": "Create Client Profile",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userId\": 1,\n  \"preferences\": \"Wedding photography\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/client/profile",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "client", "profile"]
+						}
+					}
+				},
+				{
+					"name": "Get Client Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/client/profile/:userId",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "client", "profile", ":userId"],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "6. Bookings",
+			"item": [
+				{
+					"name": "Create Booking",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"clientId\": 1,\n  \"photographerId\": 2,\n  \"eventDate\": \"2026-03-15T10:00:00\",\n  \"status\": \"PENDING\",\n  \"paid\": false\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/bookings",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "bookings"]
+						}
+					}
+				},
+				{
+					"name": "Get All Bookings",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/bookings",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "bookings"]
+						}
+					}
+				},
+				{
+					"name": "Get Bookings by Client",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/bookings/client/:clientId",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "bookings", "client", ":clientId"],
+							"variable": [
+								{
+									"key": "clientId",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Bookings by Photographer",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/bookings/photographer/:photographerId",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "bookings", "photographer", ":photographerId"],
+							"variable": [
+								{
+									"key": "photographerId",
+									"value": "2"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Accept Booking",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/bookings/:id/accept",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "bookings", ":id", "accept"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Reject Booking",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/bookings/:id/reject",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "bookings", ":id", "reject"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Cancel Booking",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/bookings/:id/cancel",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "bookings", ":id", "cancel"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Mark Booking as Paid",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/bookings/:id/pay",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "bookings", ":id", "pay"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "7. Payments & Invoices",
+			"item": [
+				{
+					"name": "Process Payment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"bookingId\": 1,\n  \"amount\": 500.00,\n  \"paymentMethod\": \"CARD\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/payments/process",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "payments", "process"]
+						}
+					}
+				},
+				{
+					"name": "Get Payment by Booking ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/payments/booking/:bookingId",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "payments", "booking", ":bookingId"],
+							"variable": [
+								{
+									"key": "bookingId",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get All Payments (Admin)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/payments/all",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "payments", "all"]
+						}
+					}
+				},
+				{
+					"name": "Get Invoice by Booking ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/payments/invoice/booking/:bookingId",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "payments", "invoice", "booking", ":bookingId"],
+							"variable": [
+								{
+									"key": "bookingId",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Download Invoice PDF",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/payments/invoice/:invoiceId/download",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "payments", "invoice", ":invoiceId", "download"],
+							"variable": [
+								{
+									"key": "invoiceId",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get All Invoices (Admin)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/payments/invoices/all",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "payments", "invoices", "all"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "8. Reviews & Ratings",
+			"item": [
+				{
+					"name": "Submit Review",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"photographerId\": 2,\n  \"clientId\": 1,\n  \"rating\": 5,\n  \"comment\": \"Excellent service and amazing photos!\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/reviews/submit",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "reviews", "submit"]
+						}
+					}
+				},
+				{
+					"name": "Get Photographer Reviews",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/reviews/photographer/:id",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "reviews", "photographer", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Review Statistics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/reviews/photographer/:id/stats",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "reviews", "photographer", ":id", "stats"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Flag Review",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/reviews/:id/flag",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "reviews", ":id", "flag"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "9. Chat",
+			"item": [
+				{
+					"name": "Create Chat Room",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"bookingId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/chat/room",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "chat", "room"]
+						}
+					}
+				},
+				{
+					"name": "Get Messages by Room ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/chat/room/:roomId/messages",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "chat", "room", ":roomId", "messages"],
+							"variable": [
+								{
+									"key": "roomId",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Messages by Booking ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/chat/messages/:bookingId",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "chat", "messages", ":bookingId"],
+							"variable": [
+								{
+									"key": "bookingId",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Mark Room Messages as Read",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/chat/rooms/:roomId/read",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "chat", "rooms", ":roomId", "read"],
+							"variable": [
+								{
+									"key": "roomId",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Mark Booking Messages as Read",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/chat/messages/:bookingId/read",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "chat", "messages", ":bookingId", "read"],
+							"variable": [
+								{
+									"key": "bookingId",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Unread Message Count",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/chat/unread/:bookingId",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "chat", "unread", ":bookingId"],
+							"variable": [
+								{
+									"key": "bookingId",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Mark Messages as Delivered",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/chat/messages/:bookingId/delivered",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "chat", "messages", ":bookingId", "delivered"],
+							"variable": [
+								{
+									"key": "bookingId",
+									"value": "1"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "10. Notifications",
+			"item": [
+				{
+					"name": "Get User Notifications",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/notifications",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "notifications"]
+						}
+					}
+				},
+				{
+					"name": "Get Unread Notification Count",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/notifications/unread-count",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "notifications", "unread-count"]
+						}
+					}
+				},
+				{
+					"name": "Get Paginated Notifications",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/notifications/page?page=0&size=10",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "notifications", "page"],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Mark Notification as Read",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/notifications/:id/read",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "notifications", ":id", "read"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Mark All Notifications as Read",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/notifications/mark-all-read",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "notifications", "mark-all-read"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "11. Portfolio",
+			"item": [
+				{
+					"name": "Get All Portfolio Items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/portfolio",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "portfolio"]
+						}
+					}
+				},
+				{
+					"name": "Get Portfolio Item by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/portfolio/:id",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "portfolio", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Featured Portfolio Items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/portfolio/featured",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "portfolio", "featured"]
+						}
+					}
+				},
+				{
+					"name": "Get Portfolio by Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/portfolio/category/:category",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "portfolio", "category", ":category"],
+							"variable": [
+								{
+									"key": "category",
+									"value": "wedding"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Portfolio Item",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Wedding Photography\",\n  \"description\": \"Beautiful wedding moments captured\",\n  \"category\": \"wedding\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/portfolio",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "portfolio"]
+						}
+					}
+				},
+				{
+					"name": "Update Portfolio Item",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Updated Title\",\n  \"description\": \"Updated description\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/portfolio/:id",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "portfolio", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Portfolio Item",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/portfolio/:id",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "portfolio", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Add Photos to Portfolio",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"photos\": [\"url1\", \"url2\", \"url3\"]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/portfolio/:id/photos",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "portfolio", ":id", "photos"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "12. Cloudinary",
+			"item": [
+				{
+					"name": "Upload Single Image",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "folder",
+									"value": "portfolio",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/cloudinary/upload",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "cloudinary", "upload"]
+						}
+					}
+				},
+				{
+					"name": "Upload Multiple Images",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "files",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "folder",
+									"value": "portfolio",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/cloudinary/upload-multiple",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "cloudinary", "upload-multiple"]
+						}
+					}
+				},
+				{
+					"name": "Delete Image",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/cloudinary/delete/:publicId",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "cloudinary", "delete", ":publicId"],
+							"variable": [
+								{
+									"key": "publicId",
+									"value": "sample_public_id"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Multiple Images",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"publicIds\": [\"id1\", \"id2\", \"id3\"]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/cloudinary/delete-multiple",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "cloudinary", "delete-multiple"]
+						}
+					}
+				},
+				{
+					"name": "Create Folder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"folderName\": \"event-123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/cloudinary/folder",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "cloudinary", "folder"]
+						}
+					}
+				},
+				{
+					"name": "Generate Image URL",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/cloudinary/generate-url?publicId=sample_id&width=800&height=600",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "cloudinary", "generate-url"],
+							"query": [
+								{
+									"key": "publicId",
+									"value": "sample_id"
+								},
+								{
+									"key": "width",
+									"value": "800"
+								},
+								{
+									"key": "height",
+									"value": "600"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Image Info",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/cloudinary/info/:publicId",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "cloudinary", "info", ":publicId"],
+							"variable": [
+								{
+									"key": "publicId",
+									"value": "sample_id"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "List Folder Contents",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/cloudinary/list-folder/:folderPath",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "cloudinary", "list-folder", ":folderPath"],
+							"variable": [
+								{
+									"key": "folderPath",
+									"value": "portfolio"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Validate Config",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/cloudinary/validate",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "cloudinary", "validate"]
+						}
+					}
+				},
+				{
+					"name": "Get Config",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/cloudinary/config",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "cloudinary", "config"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "13. ZIP Downloads",
+			"item": [
+				{
+					"name": "Create ZIP from Image Paths",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"imagePaths\": [\n    \"https://example.com/image1.jpg\",\n    \"https://example.com/image2.jpg\"\n  ],\n  \"zipFileName\": \"event-photos.zip\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/zip/create-from-paths",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "zip", "create-from-paths"]
+						}
+					}
+				},
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/zip/health",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "zip", "health"]
+						}
+					}
+				},
+				{
+					"name": "Generate ZIP Filename",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/zip/generate-name?bookingId=1&clientId=1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "zip", "generate-name"],
+							"query": [
+								{
+									"key": "bookingId",
+									"value": "1"
+								},
+								{
+									"key": "clientId",
+									"value": "1"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "14. Events/Search",
+			"item": [
+				{
+					"name": "Search Events",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/events/search?location=New York&eventType=wedding&rating=4.0&page=0&size=10&sort=rating,desc",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "events", "search"],
+							"query": [
+								{
+									"key": "location",
+									"value": "New York"
+								},
+								{
+									"key": "eventType",
+									"value": "wedding"
+								},
+								{
+									"key": "rating",
+									"value": "4.0"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "sort",
+									"value": "rating,desc"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "15. Admin Management",
+			"item": [
+				{
+					"name": "Dashboard",
+					"item": [
+						{
+							"name": "Get Dashboard Stats",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/admin/dashboard/stats",
+									"host": ["{{baseUrl}}"],
+									"path": ["api", "admin", "dashboard", "stats"]
+								}
+							}
+						}
+					]
+				},
+				{
+					"name": "Photographer Verification",
+					"item": [
+						{
+							"name": "Get Pending Verifications",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/admin/photographers/pending",
+									"host": ["{{baseUrl}}"],
+									"path": ["api", "admin", "photographers", "pending"]
+								}
+							}
+						},
+						{
+							"name": "Approve Photographer",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/admin/photographers/:id/approve",
+									"host": ["{{baseUrl}}"],
+									"path": ["api", "admin", "photographers", ":id", "approve"],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							}
+						},
+						{
+							"name": "Reject Photographer",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"reason\": \"Insufficient documentation\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/admin/photographers/:id/reject",
+									"host": ["{{baseUrl}}"],
+									"path": ["api", "admin", "photographers", ":id", "reject"],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							}
+						}
+					]
+				},
+				{
+					"name": "Booking Management",
+					"item": [
+						{
+							"name": "Override Booking Status",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"status\": \"COMPLETED\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/admin/bookings/:id/status",
+									"host": ["{{baseUrl}}"],
+									"path": ["api", "admin", "bookings", ":id", "status"],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							}
+						},
+						{
+							"name": "Cancel Booking (Admin)",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"reason\": \"Policy violation\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/admin/bookings/:id",
+									"host": ["{{baseUrl}}"],
+									"path": ["api", "admin", "bookings", ":id"],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							}
+						}
+					]
+				},
+				{
+					"name": "Review Moderation",
+					"item": [
+						{
+							"name": "Get All Reviews (Admin)",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/admin/reviews",
+									"host": ["{{baseUrl}}"],
+									"path": ["api", "admin", "reviews"]
+								}
+							}
+						},
+						{
+							"name": "Delete Review (Admin)",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"reason\": \"Inappropriate content\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/admin/reviews/:id",
+									"host": ["{{baseUrl}}"],
+									"path": ["api", "admin", "reviews", ":id"],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							}
+						}
+					]
+				},
+				{
+					"name": "Reports",
+					"item": [
+						{
+							"name": "Generate Bookings Report (CSV)",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/admin/reports/bookings",
+									"host": ["{{baseUrl}}"],
+									"path": ["api", "admin", "reports", "bookings"]
+								}
+							}
+						},
+						{
+							"name": "Generate Payments Report (CSV)",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/admin/reports/payments",
+									"host": ["{{baseUrl}}"],
+									"path": ["api", "admin", "reports", "payments"]
+								}
+							}
+						},
+						{
+							"name": "Generate Users Report (CSV)",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/admin/reports/users",
+									"host": ["{{baseUrl}}"],
+									"path": ["api", "admin", "reports", "users"]
+								}
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "16. Admin Users",
+			"item": [
+				{
+					"name": "Get All Users (Paginated)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/users?page=0&size=10",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "admin", "users"],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Search Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/users/search?keyword=john",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "admin", "users", "search"],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "john"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get User by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/users/:id",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "admin", "users", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get User Statistics",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/users/stats",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "admin", "users", "stats"]
+						}
+					}
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"UpdatedName\",\n  \"email\": \"updated@example.com\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/users/:id",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "admin", "users", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/users/:id",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "admin", "users", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Toggle User Status",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/users/:id/toggle-status",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "admin", "users", ":id", "toggle-status"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				}
+			]
+		}
+	]
+}
