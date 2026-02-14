@@ -58,17 +58,26 @@ public class PhotographersController {
 
     private Map<String, Object> photographerToMap(PhotographerProfile profile) {
         Map<String, Object> m = new HashMap<>();
-        User user = userRepository.findById(Objects.requireNonNull(profile.getUserId())).orElse(null);
+        
+        // Handle null userId gracefully
+        User user = null;
+        if (profile.getUserId() != null) {
+            @SuppressWarnings("null")
+            User foundUser = userRepository.findById(profile.getUserId()).orElse(null);
+            user = foundUser;
+        }
         
         m.put("id", profile.getId());
         m.put("userId", profile.getUserId());
+        m.put("studioName", profile.getStudioName() != null ? profile.getStudioName() : "");
         m.put("name", user != null ? user.getUsername() : "Unknown");
         m.put("email", user != null ? user.getEmail() : "");
         m.put("averageRating", profile.getAverageRating() != null ? profile.getAverageRating() : 0.0);
         m.put("reviewCount", profile.getReviewCount() != null ? profile.getReviewCount() : 0);
-        m.put("profilePhoto", user != null ? user.getProfilePhoto() : "");
-        m.put("location", user != null ? user.getLocation() : "");
-        m.put("hourlyRate", user != null ? user.getHourlyRate() : 0.0);
+        m.put("verified", profile.isVerified());
+        m.put("profilePhoto", user != null && user.getProfilePhoto() != null ? user.getProfilePhoto() : "/images/default-avatar.png");
+        m.put("location", user != null && user.getLocation() != null ? user.getLocation() : "Not specified");
+        m.put("hourlyRate", user != null && user.getHourlyRate() != null ? user.getHourlyRate() : 0.0);
         
         return m;
     }

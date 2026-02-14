@@ -156,7 +156,7 @@ public class ChatService {
         List<ChatMessage> unreadMessages = chatMessageRepository
                 .findByChatRoomIdAndSenderIdNotAndIsReadFalse(chatRoom.getId(), userId);
         
-        unreadMessages.forEach(msg -> msg.setIsRead(true));
+        unreadMessages.forEach(msg -> msg.setRead(true));
         chatMessageRepository.saveAll(unreadMessages);
         
         // Also mark room as read for this user

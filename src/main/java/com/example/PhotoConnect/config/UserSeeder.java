@@ -2,8 +2,12 @@ package com.example.PhotoConnect.config;
 
 import com.example.PhotoConnect.model.Role;
 import com.example.PhotoConnect.model.User;
+import com.example.PhotoConnect.model.PhotographerProfile;
+import com.example.PhotoConnect.model.ClientProfile;
 import com.example.PhotoConnect.repository.RoleRepository;
 import com.example.PhotoConnect.repository.UserRepository;
+import com.example.PhotoConnect.repository.PhotographerProfileRepository;
+import com.example.PhotoConnect.repository.ClientProfileRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +42,12 @@ public class UserSeeder implements CommandLineRunner {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private PhotographerProfileRepository photographerProfileRepository;
+
+    @Autowired
+    private ClientProfileRepository clientProfileRepository;
 
     @Override
     public void run(String... args) {
@@ -77,7 +87,22 @@ public class UserSeeder implements CommandLineRunner {
         user.setResetTokenExpiry(null);
         user.setRole(role);
 
-        userRepository.save(user);
+        User savedUser = userRepository.save(user);
         logger.info("Created user: {} with role {}", email, roleName);
+
+        // Create appropriate profile based on role
+        if (roleName.equals("ROLE_PHOTOGRAPHER")) {
+            PhotographerProfile profile = new PhotographerProfile();
+            profile.setUserId(savedUser.getId());
+            profile.setVerified(true); // Auto-verify seeded photographers
+            profile.setStudioName(username + " Studio");
+            photographerProfileRepository.save(profile);
+            logger.info("Created photographer profile for user: {}", email);
+        } else if (roleName.equals("ROLE_CLIENT")) {
+            ClientProfile profile = new ClientProfile();
+            profile.setUserId(savedUser.getId());
+            clientProfileRepository.save(profile);
+            logger.info("Created client profile for user: {}", email);
+        }
     }
 }

@@ -27,8 +27,11 @@ public class BookingService {
                 .paid(false)
                 .build();
 
-        return bookingRepository.save(booking);
+        @SuppressWarnings("null")
+        Booking savedBooking = bookingRepository.save(booking);
+        return savedBooking;
     }
+    @SuppressWarnings("null")
     public @NonNull Booking acceptBooking(Long bookingId) {
         Objects.requireNonNull(bookingId);
         Booking booking = getBooking(bookingId);

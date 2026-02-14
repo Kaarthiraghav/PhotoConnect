@@ -6,6 +6,7 @@ body {
   font-family: "Roboto", sans-serif;
   background-color: #f0f2f5;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
@@ -17,6 +18,8 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
+  flex: 1;
+  padding: 20px 0;
 }
 
 .signin-form-container,
@@ -29,22 +32,65 @@ body {
   max-width: 100%;
   min-height: 480px;
   display: flex;
+  position: relative;
+  transition: all 0.6s ease-in-out;
+}
+
+.signin-form-container.right-panel-active,
+.signup-form-container.right-panel-active {
+  transform: none;
 }
 
 .signin-section,
 .create-account-section {
-  flex: 1;
   padding: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+  transition: all 0.6s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  opacity: 0;
+  z-index: 1;
+}
+
+.signin-section {
+  opacity: 1;
+  z-index: 2;
+}
+
+.signin-form-container.right-panel-active .signin-section,
+.signup-form-container.right-panel-active .signin-section {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.signin-form-container.right-panel-active .create-account-section,
+.signup-form-container.right-panel-active .create-account-section {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 2;
+  animation: show 0.6s;
+}
+
+@keyframes show {
+  0%, 49.99% {
+    opacity: 0;
+    z-index: 1;
+  }
+  50%, 100% {
+    opacity: 1;
+    z-index: 5;
+  }
 }
 
 .hello-friend-section,
 .welcome-section {
-  flex: 1;
   background: linear-gradient(to right, #ff4b2b, #ff416c);
   color: white;
   padding: 50px;
@@ -53,10 +99,60 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  transition: all 0.6s ease-in-out;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.hello-friend-section {
+  right: 0;
+}
+
+.welcome-section {
+  left: 0;
+  transform: translateX(-100%);
+}
+
+.signin-form-container.right-panel-active .hello-friend-section,
+.signup-form-container.right-panel-active .hello-friend-section {
+  transform: translateX(100%);
+}
+
+.signin-form-container.right-panel-active .welcome-section,
+.signup-form-container.right-panel-active .welcome-section {
+  transform: translateX(0);
+}
+
+.hello-friend-section h2,
+.welcome-section h2 {
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.hello-friend-section p,
+.welcome-section p {
+  margin: 15px 0 25px;
+  line-height: 1.6;
+  font-size: 14px;
 }
 
 h2 {
   margin-bottom: 20px;
+}
+
+h3 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+form {
+  width: 100%;
 }
 
 .input-group {
@@ -118,6 +214,7 @@ button:focus {
 button.ghost {
   background-color: transparent;
   border-color: #ffffff;
+  cursor: pointer;
 }
 
 .sign-up-btn,
@@ -125,11 +222,15 @@ button.ghost {
   text-decoration: none;
   color: white;
   border: 1px solid white;
-  padding: 10px 20px;
+  padding: 10px 30px;
   border-radius: 20px;
   margin-top: 20px;
   display: inline-block;
   transition: all 0.3s ease;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .sign-up-btn:hover,
@@ -138,8 +239,10 @@ button.ghost {
   color: #ff4b2b;
 }
 
-.sign-in-btn-main {
-  /* specific style if needed */
+.sign-in-btn-main,
+.sign-up-btn-main {
+  width: 100%;
+  max-width: 300px;
 }
 
 .logo-dippella,
@@ -150,6 +253,47 @@ button.ghost {
   color: #333;
 }
 
+.welcome-section .logo,
 .hello-friend-section .logo {
   color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .signin-form-container,
+  .signup-form-container {
+    flex-direction: column;
+    width: 95%;
+  }
+  
+  .signin-section,
+  .create-account-section {
+    width: 100%;
+    padding: 30px;
+    position: relative;
+  }
+  
+  .hello-friend-section,
+  .welcome-section {
+    width: 100%;
+    padding: 30px;
+    position: relative;
+    transform: none !important;
+  }
+  
+  .signin-form-container.right-panel-active .signin-section,
+  .signup-form-container.right-panel-active .signin-section {
+    transform: none;
+  }
+  
+  .signin-form-container.right-panel-active .create-account-section,
+  .signup-form-container.right-panel-active .create-account-section {
+    transform: none;
+  }
+}
+
+/* Footer spacing fix */
+#footer {
+  margin-top: auto;
+  width: 100%;
 }

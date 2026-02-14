@@ -8,8 +8,12 @@ import com.example.PhotoConnect.dto.ForgotPasswordRequest;
 import com.example.PhotoConnect.dto.ResetPasswordRequest;
 import com.example.PhotoConnect.model.Role;
 import com.example.PhotoConnect.model.User;
+import com.example.PhotoConnect.model.PhotographerProfile;
+import com.example.PhotoConnect.model.ClientProfile;
 import com.example.PhotoConnect.repository.RoleRepository;
 import com.example.PhotoConnect.repository.UserRepository;
+import com.example.PhotoConnect.repository.PhotographerProfileRepository;
+import com.example.PhotoConnect.repository.ClientProfileRepository;
 import com.example.PhotoConnect.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -46,6 +50,12 @@ public class AuthService {
     @Autowired
     private EmailService emailService;
 
+    @Autowired
+    private PhotographerProfileRepository photographerProfileRepository;
+
+    @Autowired
+    private ClientProfileRepository clientProfileRepository;
+
     @Transactional
     public String registerClient(RegisterRequest registerRequest) {
         // Check if email already exists
@@ -68,14 +78,31 @@ public class AuthService {
         String verificationCode = UUID.randomUUID().toString();
         user.setVerificationCode(verificationCode);
 
-        // Assign CLIENT role by default
-        Role clientRole = roleRepository.findByName("ROLE_CLIENT")
-                .orElseThrow(() -> new RuntimeException("Client role not found. Please ensure roles are seeded."));
+        // Determine role based on request (default to CLIENT)
+        final String roleName = (registerRequest.getRole() != null && 
+                                  registerRequest.getRole().equalsIgnoreCase("PHOTOGRAPHER")) 
+                                  ? "ROLE_PHOTOGRAPHER" 
+                                  : "ROLE_CLIENT";
 
-        user.setRole(clientRole);
+        Role userRole = roleRepository.findByName(roleName)
+                .orElseThrow(() -> new RuntimeException(roleName + " role not found. Please ensure roles are seeded."));
+
+        user.setRole(userRole);
 
         // Save user to database
-        userRepository.save(user);
+        User savedUser = userRepository.save(user);
+
+        // Create appropriate profile based on role
+        if (roleName.equals("ROLE_PHOTOGRAPHER")) {
+            PhotographerProfile profile = new PhotographerProfile();
+            profile.setUserId(savedUser.getId());
+            profile.setVerified(false);
+            photographerProfileRepository.save(profile);
+        } else {
+            ClientProfile profile = new ClientProfile();
+            profile.setUserId(savedUser.getId());
+            clientProfileRepository.save(profile);
+        }
 
         // Send verification email
         emailService.sendVerificationEmail(user.getEmail(), verificationCode);

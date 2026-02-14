@@ -3,6 +3,7 @@ import { registerUser, loginUser } from '/js/api.js';
 document.addEventListener('DOMContentLoaded', () => {
     const signupForm = document.getElementById('signupForm');
     const signinForm = document.getElementById('signinForm');
+    const container = document.getElementById('authContainer');
 
     if (signupForm) {
         signupForm.addEventListener('submit', async (e) => {
@@ -15,12 +16,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 const res = await registerUser({ username, email, password });
                 if (res && res.message) {
                     alert('Registered: ' + res.message);
-                    window.location.href = '/pages/signin.html';
+                    if (container) {
+                        container.classList.remove('right-panel-active');
+                    }
                 } else if (res && res.error) {
                     alert('Error: ' + (res.message || res.error));
                 } else {
                     alert('Registered successfully');
-                    window.location.href = '/pages/signin.html';
+                    if (container) {
+                        container.classList.remove('right-panel-active');
+                    }
                 }
             } catch (err) {
                 console.error(err);

@@ -36,7 +36,7 @@
                 card.setAttribute('tabindex', '0');
                 card.dataset.photographerId = String(photographer.id);
                 card.innerHTML = `
-                    <div class="card-image" style="background-image: url('${photographer.profilePhoto || '/images/default-avatar.png'}'); background-size: cover; background-position: center;"></div>
+                    <div class="card-image" style="background-image: url('${photographer.profilePhoto || '/images/default-avatar.svg'}'); background-size: cover; background-position: center;"></div>
                     <div class="card-content">
                         <div class="photographer-name">${photographer.name}</div>
                         <div class="photographer-location">📍 ${photographer.location || 'Not specified'}</div>
@@ -137,6 +137,6 @@
             document.getElementById('nextBtn').disabled = currentPage === 4;
         }
 
-        // Initialize
-        displayPhotographers();
+        // Initialize - Load photographers on page load
+        loadPhotographers();
    
