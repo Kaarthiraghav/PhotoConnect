@@ -32,22 +32,65 @@ body {
   max-width: 100%;
   min-height: 480px;
   display: flex;
+  position: relative;
+  transition: all 0.6s ease-in-out;
+}
+
+.signin-form-container.right-panel-active,
+.signup-form-container.right-panel-active {
+  transform: none;
 }
 
 .signin-section,
 .create-account-section {
-  flex: 1;
   padding: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+  transition: all 0.6s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  opacity: 0;
+  z-index: 1;
+}
+
+.signin-section {
+  opacity: 1;
+  z-index: 2;
+}
+
+.signin-form-container.right-panel-active .signin-section,
+.signup-form-container.right-panel-active .signin-section {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.signin-form-container.right-panel-active .create-account-section,
+.signup-form-container.right-panel-active .create-account-section {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 2;
+  animation: show 0.6s;
+}
+
+@keyframes show {
+  0%, 49.99% {
+    opacity: 0;
+    z-index: 1;
+  }
+  50%, 100% {
+    opacity: 1;
+    z-index: 5;
+  }
 }
 
 .hello-friend-section,
 .welcome-section {
-  flex: 1;
   background: linear-gradient(to right, #ff4b2b, #ff416c);
   color: white;
   padding: 50px;
@@ -56,6 +99,32 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  transition: all 0.6s ease-in-out;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.hello-friend-section {
+  right: 0;
+}
+
+.welcome-section {
+  left: 0;
+  transform: translateX(-100%);
+}
+
+.signin-form-container.right-panel-active .hello-friend-section,
+.signup-form-container.right-panel-active .hello-friend-section {
+  transform: translateX(100%);
+}
+
+.signin-form-container.right-panel-active .welcome-section,
+.signup-form-container.right-panel-active .welcome-section {
+  transform: translateX(0);
 }
 
 .hello-friend-section h2,
@@ -145,6 +214,7 @@ button:focus {
 button.ghost {
   background-color: transparent;
   border-color: #ffffff;
+  cursor: pointer;
 }
 
 .sign-up-btn,
@@ -197,10 +267,28 @@ button.ghost {
   }
   
   .signin-section,
-  .create-account-section,
+  .create-account-section {
+    width: 100%;
+    padding: 30px;
+    position: relative;
+  }
+  
   .hello-friend-section,
   .welcome-section {
+    width: 100%;
     padding: 30px;
+    position: relative;
+    transform: none !important;
+  }
+  
+  .signin-form-container.right-panel-active .signin-section,
+  .signup-form-container.right-panel-active .signin-section {
+    transform: none;
+  }
+  
+  .signin-form-container.right-panel-active .create-account-section,
+  .signup-form-container.right-panel-active .create-account-section {
+    transform: none;
   }
 }
 
