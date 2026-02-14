@@ -242,6 +242,12 @@ button {
 .section-title.light {
   color: #eee;
 }
+.section-subtitle {
+  font-size: 14px;
+  color: #666;
+  margin: -20px 0 30px;
+  font-weight: 400;
+}
 .panel-grid {
   display: grid;
   gap: 12px;

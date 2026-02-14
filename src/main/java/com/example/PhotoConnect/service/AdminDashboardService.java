@@ -1,13 +1,17 @@
 package com.example.PhotoConnect.service;
 
+import com.example.PhotoConnect.model.Payment;
 import com.example.PhotoConnect.repository.UserRepository;
 import com.example.PhotoConnect.repository.BookingRepository;
 import com.example.PhotoConnect.repository.PhotographerProfileRepository;
+import com.example.PhotoConnect.repository.PaymentRepository;
+import com.example.PhotoConnect.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -17,6 +21,8 @@ public class AdminDashboardService {
     private final UserRepository userRepository;
     private final BookingRepository bookingRepository;
     private final PhotographerProfileRepository photographerProfileRepository;
+    private final PaymentRepository paymentRepository;
+    private final ReviewRepository reviewRepository;
 
     public Map<String, Object> getDashboardStats() {
         Map<String, Object> stats = new HashMap<>();
@@ -42,7 +48,7 @@ public class AdminDashboardService {
         long todayBookings = bookingRepository.countByEventDateAfter(startOfDay);
         stats.put("todayBookings", todayBookings);
 
-        // Calculate monthly revenue (simple example)
+        // Calculate monthly revenue
         double monthlyRevenue = calculateMonthlyRevenue();
         stats.put("monthlyRevenue", monthlyRevenue);
 
@@ -50,13 +56,22 @@ public class AdminDashboardService {
         long pendingVerifications = photographerProfileRepository.countByVerifiedFalse();
         stats.put("pendingVerifications", pendingVerifications);
 
+        // Total reviews
+        long totalReviews = reviewRepository.count();
+        stats.put("totalReviews", totalReviews);
+
         return stats;
     }
 
     private double calculateMonthlyRevenue() {
-        // Simple calculation - you might need to adjust based on your Booking entity
-        // If your Booking entity has a 'price' or 'amount' field
-        // You'll need to check what field name you use
-        return 0.0; // Placeholder - we'll fix this next
+        LocalDateTime startOfMonth = LocalDateTime.now().withDayOfMonth(1).withHour(0).withMinute(0).withSecond(0);
+        List<Payment> monthlyPayments = paymentRepository.findAll().stream()
+                .filter(p -> p.getCreatedAt() != null && p.getCreatedAt().isAfter(startOfMonth))
+                .filter(p -> "COMPLETED".equals(p.getPaymentStatus()))
+                .toList();
+        
+        return monthlyPayments.stream()
+                .mapToDouble(Payment::getAmount)
+                .sum();
     }
 }

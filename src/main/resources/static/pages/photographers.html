@@ -11,16 +11,9 @@
 
     <main class="panel-section">
       <h1 class="section-title">Photographers</h1>
-      <div class="panel-grid">
-        <a class="panel-item" href="/pages/photographer_profile.html?id=1">
-          <img src="/images/sample1.jpg" alt="Photographer John Doe" />
-        </a>
-        <a class="panel-item" href="/pages/photographer_profile.html?id=2">
-          <img src="/images/sample2.jpg" alt="Photographer" />
-        </a>
-        <a class="panel-item" href="/pages/photographer_profile.html?id=3">
-          <img src="/images/sample3.jpg" alt="Photographer" />
-        </a>
+      <p class="section-subtitle">Browse our talented photography professionals</p>
+      <div class="panel-grid" id="photographersGrid">
+        <!-- Photographer cards will be loaded dynamically -->
       </div>
     </main>
 
@@ -28,5 +21,43 @@
 
     <script src="/js/navbar.js"></script>
     <script src="/js/footer.js"></script>
+    <script>
+      // Load photographers dynamically
+      async function loadPhotographers() {
+        const grid = document.getElementById('photographersGrid');
+        try {
+          const response = await fetch('/api/photographers');
+          if (!response.ok) throw new Error('Failed to load');
+          
+          const photographers = await response.json();
+          
+          if (photographers.length === 0) {
+            grid.innerHTML = '<p style="text-align:center;padding:40px;grid-column:1/-1;">No photographers available yet.</p>';
+            return;
+          }
+          
+          grid.innerHTML = photographers.slice(0, 12).map(p => `
+            <a class="panel-item" href="/pages/photographer_profile.html?id=${p.id}" style="text-decoration:none;color:inherit;">
+              <div style="position:relative;width:100%;padding-bottom:100%;overflow:hidden;">
+                <img src="${p.profilePhoto || '/images/default-avatar.svg'}" 
+                     alt="${p.name}" 
+                     onerror="this.src='/images/default-avatar.svg'"
+                     style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;" />
+              </div>
+              <div style="padding:12px;background:#fff;text-align:center;">
+                <div style="font-weight:600;font-size:14px;margin-bottom:4px;">${p.name}</div>
+                <div style="font-size:12px;color:#666;">${p.location || 'Photographer'}</div>
+              </div>
+            </a>
+          `).join('');
+          
+        } catch (error) {
+          console.error('Error loading photographers:', error);
+          grid.innerHTML = '<p style="text-align:center;padding:40px;grid-column:1/-1;">Unable to load photographers. Please try again later.</p>';
+        }
+      }
+      
+      loadPhotographers();
+    </script>
   </body>
 </html>

@@ -137,6 +137,6 @@
             document.getElementById('nextBtn').disabled = currentPage === 4;
         }
 
-        // Initialize
-        displayPhotographers();
+        // Initialize - Load photographers on page load
+        loadPhotographers();
    
