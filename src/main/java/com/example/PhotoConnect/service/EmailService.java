@@ -54,4 +54,20 @@ public class EmailService {
                 "This token expires in 15 minutes.");
         mailSender.send(message);
     }
+
+    @Async
+    public void sendEmail(String to, String subject, String body) {
+        try {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setFrom(fromAddress);
+            message.setTo(to);
+            message.setSubject(subject);
+            message.setText(body);
+            mailSender.send(message);
+            log.info("Email sent to {} with subject: {}", to, subject);
+        } catch (Exception ex) {
+            log.error("Failed to send email to {}", to, ex);
+            throw new RuntimeException("Unable to send email. Please try again later.");
+        }
+    }
 }

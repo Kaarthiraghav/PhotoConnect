@@ -6,6 +6,7 @@ body {
   font-family: "Roboto", sans-serif;
   background-color: #f0f2f5;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
@@ -17,6 +18,8 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
+  flex: 1;
+  padding: 20px 0;
 }
 
 .signin-form-container,
@@ -55,8 +58,32 @@ body {
   text-align: center;
 }
 
+.hello-friend-section h2,
+.welcome-section h2 {
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.hello-friend-section p,
+.welcome-section p {
+  margin: 15px 0 25px;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
 h2 {
   margin-bottom: 20px;
+}
+
+h3 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+form {
+  width: 100%;
 }
 
 .input-group {
@@ -125,11 +152,15 @@ button.ghost {
   text-decoration: none;
   color: white;
   border: 1px solid white;
-  padding: 10px 20px;
+  padding: 10px 30px;
   border-radius: 20px;
   margin-top: 20px;
   display: inline-block;
   transition: all 0.3s ease;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .sign-up-btn:hover,
@@ -138,8 +169,10 @@ button.ghost {
   color: #ff4b2b;
 }
 
-.sign-in-btn-main {
-  /* specific style if needed */
+.sign-in-btn-main,
+.sign-up-btn-main {
+  width: 100%;
+  max-width: 300px;
 }
 
 .logo-dippella,
@@ -150,6 +183,29 @@ button.ghost {
   color: #333;
 }
 
+.welcome-section .logo,
 .hello-friend-section .logo {
   color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .signin-form-container,
+  .signup-form-container {
+    flex-direction: column;
+    width: 95%;
+  }
+  
+  .signin-section,
+  .create-account-section,
+  .hello-friend-section,
+  .welcome-section {
+    padding: 30px;
+  }
+}
+
+/* Footer spacing fix */
+#footer {
+  margin-top: auto;
+  width: 100%;
 }

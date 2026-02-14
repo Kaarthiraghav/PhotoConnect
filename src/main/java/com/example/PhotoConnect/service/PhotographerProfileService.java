@@ -1,24 +1,24 @@
 package com.example.PhotoConnect.service;
 
-import com.example.PhotoConnect.model.PhotographerProfiles;
-import com.example.PhotoConnect.repository.PhotographerProfilesRepository;
+import com.example.PhotoConnect.model.PhotographerProfile;
+import com.example.PhotoConnect.repository.PhotographerProfileRepository;
 
 import org.springframework.stereotype.Service;
 
 @Service
 public class PhotographerProfileService {
 
-    private final PhotographerProfilesRepository repo;
+    private final PhotographerProfileRepository repo;
 
-    public PhotographerProfileService(PhotographerProfilesRepository repo) {
+    public PhotographerProfileService(PhotographerProfileRepository repo) {
         this.repo = repo;
     }
 
-    public PhotographerProfiles save(PhotographerProfiles profile) {
+    public PhotographerProfile save(PhotographerProfile profile) {
         return repo.save(profile);
     }
 
-    public PhotographerProfiles getByUserId(Long userId) {
+    public PhotographerProfile getByUserId(Long userId) {
         return repo.findByUserId(userId)
                 .orElseThrow(() -> new RuntimeException("Photographer profile not found for user ID: " + userId));
     }

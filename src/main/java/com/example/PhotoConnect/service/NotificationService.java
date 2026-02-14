@@ -17,7 +17,7 @@ public class NotificationService {
     private NotificationRepository notificationRepository;
 
     @Autowired
-    private GmailService gmailService;
+    private EmailService emailService;
 
     public void createNotification(Long userId, UserRole role, String title, String message, NotificationType type, String email) {
         Notification notification = new Notification();
@@ -29,7 +29,7 @@ public class NotificationService {
 
         notificationRepository.save(notification);
 
-        gmailService.sendEmail(email, title, message);
+        emailService.sendEmail(email, title, message);
     }
 
     public List<Notification> getUserNotifications(Long userId) {

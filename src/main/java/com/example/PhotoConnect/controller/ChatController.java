@@ -75,6 +75,38 @@ public class ChatController {
         return ResponseEntity.ok().build();
     }
 
+    // Get chat history by booking ID
+    @GetMapping("/messages/{bookingId}")
+    public List<ChatMessage> getChatHistory(@PathVariable Long bookingId) {
+        return chatService.getMessagesForBooking(bookingId);
+    }
 
+    // Mark messages as read for a booking
+    @PostMapping("/messages/{bookingId}/read")
+    public ResponseEntity<Void> markMessagesAsRead(
+            @PathVariable Long bookingId,
+            @RequestParam String userId
+    ) {
+        chatService.markMessagesAsRead(bookingId, userId);
+        return ResponseEntity.ok().build();
+    }
 
+    // Get unread message count
+    @GetMapping("/unread/{bookingId}")
+    public long getUnreadCount(
+            @PathVariable Long bookingId,
+            @RequestParam String userId
+    ) {
+        return chatService.getUnreadCount(bookingId, userId);
+    }
+
+    // Mark messages as delivered
+    @PostMapping("/messages/{bookingId}/delivered")
+    public ResponseEntity<Void> markMessagesAsDelivered(
+            @PathVariable Long bookingId,
+            @RequestParam String userId
+    ) {
+        chatService.markMessagesAsDelivered(bookingId, userId);
+        return ResponseEntity.ok().build();
+    }
 }

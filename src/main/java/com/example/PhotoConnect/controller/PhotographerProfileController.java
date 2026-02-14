@@ -1,6 +1,6 @@
 package com.example.PhotoConnect.controller;
 
-import com.example.PhotoConnect.model.PhotographerProfiles;
+import com.example.PhotoConnect.model.PhotographerProfile;
 import com.example.PhotoConnect.service.PhotographerProfileService;
 
 import org.springframework.web.bind.annotation.*;
@@ -16,12 +16,12 @@ public class PhotographerProfileController {
     }
 
     @PostMapping
-    public PhotographerProfiles save(@RequestBody PhotographerProfiles profile) {
+    public PhotographerProfile save(@RequestBody PhotographerProfile profile) {
         return service.save(profile);
     }
 
     @GetMapping("/{userId}")
-    public PhotographerProfiles get(@PathVariable Long userId) {
+    public PhotographerProfile get(@PathVariable Long userId) {
         return service.getByUserId(userId);
     }
 }
