@@ -22,6 +22,11 @@ PhotoConnect follows a structured enterprise architecture:
 
 ------------------------------------------------------------------------
 
+## GitHub Repository
+Repo - https://github.com/Kaarthiraghav/PhotoConnect
+
+------------------------------------------------------------------------
+
 ## Project Structure
 
     com.example.PhotoConnect
