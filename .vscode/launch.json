@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-PhotoConnectApplication<PhotoConnect>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.PhotoConnect.PhotoConnectApplication",
+            "projectName": "PhotoConnect",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
