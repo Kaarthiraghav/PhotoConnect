@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photographer Dashboard - PhotoConnect</title>
+    <link rel="stylesheet" href="/css/site.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="navbar"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="page-header">
+                <h1>Photographer Dashboard</h1>
+                <p>Manage your photography business</p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid-four">
+                <div class="stat-card cyan">
+                    <div class="stat-content">
+                        <div class="stat-text">
+                            <p class="stat-title">My Photos</p>
+                            <h3 class="stat-value">1,234</h3>
+                        </div>
+                        <div class="stat-icon">
+                            <i class="fas fa-image"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card orange">
+                    <div class="stat-content">
+                        <div class="stat-text">
+                            <p class="stat-title">Events</p>
+                            <h3 class="stat-value">23</h3>
+                        </div>
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card green">
+                    <div class="stat-content">
+                        <div class="stat-text">
+                            <p class="stat-title">Earnings</p>
+                            <h3 class="stat-value">$4,567</h3>
+                        </div>
+                        <div class="stat-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card indigo">
+                    <div class="stat-content">
+                        <div class="stat-text">
+                            <p class="stat-title">Clients</p>
+                            <h3 class="stat-value">67</h3>
+                        </div>
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Grid -->
+            <div class="content-grid">
+                <!-- Profile Card -->
+                <div class="card">
+                    <h3 class="card-title"><i class="fas fa-camera"></i> Photo Profile</h3>
+                    <div class="profile-content">
+                        <div class="profile-header">
+                            <div class="avatar">JD</div>
+                            <div class="profile-info">
+                                <h4>John Photographer</h4>
+                                <p>Wedding & Events Specialist</p>
+                            </div>
+                        </div>
+                        <div class="profile-stats">
+                            <div class="profile-stat">
+                                <div class="profile-stat-value">4.9</div>
+                                <div class="profile-stat-label">Rating</div>
+                            </div>
+                            <div class="profile-stat">
+                                <div class="profile-stat-value">234</div>
+                                <div class="profile-stat-label">Reviews</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary">Edit Profile</button>
+                    </div>
+                </div>
+
+                <!-- Chat & Availability -->
+                <div class="card">
+                    <h3 class="card-title"><i class="fas fa-comment"></i> Chat & Availability</h3>
+                    <div class="chat-content">
+                        <div class="upcoming-shoot">
+                            <p class="shoot-label">Upcoming Shoot</p>
+                            <p class="shoot-title">Wedding Photography</p>
+                            <p class="shoot-time">Tomorrow, 2:00 PM</p>
+                        </div>
+                        <button class="btn btn-primary">Open Chat</button>
+                        <button class="btn btn-secondary">Update Availability</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="/js/navbar.js"></script>
+    <script src="/js/footer.js"></script>
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>

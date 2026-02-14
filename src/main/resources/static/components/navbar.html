@@ -1,0 +1,40 @@
+<nav class="navbar" aria-label="Primary">
+  <a class="logo" href="/index.html" aria-label="PhotoConnect Home">PC</a>
+
+  <ul class="nav-links" id="nav-links">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/pages/photographers.html">Photographers</a></li>
+    <li><a href="/pages/about_us.html">About Us</a></li>
+    <li><a href="/pages/contact_us.html">Contact Us</a></li>
+  </ul>
+
+  <div class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <div id="nav-right" class="nav-right">
+    <button class="signin-btn" aria-label="Sign In">Sign In</button>
+    <button class="logout-btn" aria-label="Log Out" style="display:none;">Log Out</button>
+  </div>
+</nav>
+
+<script>
+  // Mobile menu toggle
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+
+  if (hamburger) {
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    // Close menu when link is clicked
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
+    });
+  }
+</script>

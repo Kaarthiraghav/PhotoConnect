@@ -1,0 +1,283 @@
+﻿/* About Us Page Styling */
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #000000 0%, #000000 100%);
+    color: rgb(255, 255, 255);
+    padding: 80px 20px;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.hero-content h1 {
+    font-size: 48px;
+    margin: 0 0 20px 0;
+    font-weight: 700;
+}
+
+.hero-content p {
+    font-size: 18px;
+    margin: 0;
+    opacity: 0.95;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+}
+
+/* Card Sections */
+.card-section {
+    margin-bottom: 50px;
+}
+
+.card {
+    background: white;
+    padding: 50px 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #667eea;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card .icon {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.card h2 {
+    font-size: 28px;
+    margin: 0 0 20px 0;
+    color: #333;
+    font-weight: 600;
+}
+
+.card p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #555;
+    margin: 0 0 15px 0;
+}
+
+.card p:last-child {
+    margin-bottom: 0;
+}
+
+/* Highlight Section */
+.highlight {
+    background: linear-gradient(135deg, #000000 0%, #000000 100%);
+    color: white;
+    padding: 60px 40px;
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 60px;
+}
+
+.highlight h2 {
+    font-size: 32px;
+    margin: 0 0 20px 0;
+    font-weight: 700;
+}
+
+.highlight .tagline {
+    font-size: 18px;
+    opacity: 0.95;
+    margin: 15px 0;
+    font-style: italic;
+}
+
+.highlight-main {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 20px 0;
+}
+
+.highlight p {
+    font-size: 16px;
+    line-height: 1.8;
+    margin: 15px 0;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Responsive Design */
+
+/* Tablet Layout (768px - 1023px) */
+@media (max-width: 1023px) {
+    .hero-content h1 {
+        font-size: 40px;
+    }
+
+    .hero-content p {
+        font-size: 16px;
+    }
+
+    .card {
+        padding: 40px 30px;
+    }
+
+    .card h2 {
+        font-size: 24px;
+    }
+
+    .card p {
+        font-size: 15px;
+    }
+
+    .card .icon {
+        font-size: 40px;
+    }
+
+    .highlight {
+        padding: 50px 30px;
+    }
+
+    .highlight h2 {
+        font-size: 28px;
+    }
+}
+
+/* Mobile Layout (480px - 767px) */
+@media (max-width: 767px) {
+    .hero {
+        padding: 60px 15px;
+        margin-bottom: 40px;
+    }
+
+    .hero-content h1 {
+        font-size: 32px;
+        margin-bottom: 15px;
+    }
+
+    .hero-content p {
+        font-size: 16px;
+    }
+
+    .container {
+        padding: 0 15px 40px;
+    }
+
+    .card-section {
+        margin-bottom: 30px;
+    }
+
+    .card {
+        padding: 30px 20px;
+        border-radius: 8px;
+    }
+
+    .card h2 {
+        font-size: 20px;
+        margin: 10px 0 15px 0;
+    }
+
+    .card p {
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+    .card .icon {
+        font-size: 40px;
+        margin-bottom: 8px;
+    }
+
+    .highlight {
+        padding: 40px 20px;
+        margin-top: 40px;
+    }
+
+    .highlight h2 {
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+
+    .highlight .tagline {
+        font-size: 16px;
+        margin: 10px 0;
+    }
+
+    .highlight p {
+        font-size: 14px;
+        margin: 10px 0;
+    }
+
+    .highlight-main {
+        font-size: 18px;
+    }
+}
+
+/* Extra Small Devices (< 480px) */
+@media (max-width: 479px) {
+    .hero {
+        padding: 40px 10px;
+        margin-bottom: 30px;
+    }
+
+    .hero-content h1 {
+        font-size: 26px;
+        margin-bottom: 12px;
+    }
+
+    .hero-content p {
+        font-size: 14px;
+    }
+
+    .container {
+        padding: 0 10px 30px;
+    }
+
+    .card {
+        padding: 20px 15px;
+    }
+
+    .card h2 {
+        font-size: 18px;
+        margin: 8px 0 12px 0;
+    }
+
+    .card p {
+        font-size: 13px;
+        line-height: 1.6;
+        margin: 0 0 10px 0;
+    }
+
+    .card .icon {
+        font-size: 36px;
+        margin-bottom: 6px;
+    }
+
+    .highlight {
+        padding: 30px 15px;
+        margin-top: 30px;
+    }
+
+    .highlight h2 {
+        font-size: 20px;
+        margin-bottom: 12px;
+    }
+
+    .highlight .tagline {
+        font-size: 14px;
+        margin: 8px 0;
+    }
+
+    .highlight p {
+        font-size: 13px;
+        margin: 8px 0;
+    }
+
+    .highlight-main {
+        font-size: 16px;
+    }
+}

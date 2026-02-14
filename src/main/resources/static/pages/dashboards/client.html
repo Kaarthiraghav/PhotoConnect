@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Dashboard - PhotoConnect</title>
+    <link rel="stylesheet" href="/css/site.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="navbar"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="page-header">
+                <h1>Client Dashboard</h1>
+                <p>View your photos and manage bookings</p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card rose">
+                    <div class="stat-content">
+                        <div class="stat-text">
+                            <p class="stat-title">My Photos</p>
+                            <h3 class="stat-value">456</h3>
+                        </div>
+                        <div class="stat-icon">
+                            <i class="fas fa-image"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card teal">
+                    <div class="stat-content">
+                        <div class="stat-text">
+                            <p class="stat-title">Events Booked</p>
+                            <h3 class="stat-value">3</h3>
+                        </div>
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card violet">
+                    <div class="stat-content">
+                        <div class="stat-text">
+                            <p class="stat-title">Payments</p>
+                            <h3 class="stat-value">$2,340</h3>
+                        </div>
+                        <div class="stat-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Grid -->
+            <div class="content-grid">
+                <!-- My Events -->
+                <div class="card">
+                    <h3 class="card-title"><i class="fas fa-th-large"></i> My Dashboard</h3>
+                    <div class="events-list" id="eventsList"></div>
+                </div>
+
+                <!-- Chat -->
+                <div class="card">
+                    <h3 class="card-title"><i class="fas fa-comment"></i> Chat with Photographer</h3>
+                    <div class="chat-content">
+                        <div class="next-event">
+                            <p class="event-label">Next Event</p>
+                            <p class="event-title">Family Photoshoot</p>
+                            <p class="event-time">Dec 15, 2024 at 10:00 AM</p>
+                        </div>
+                        <button class="btn btn-primary">Message Photographer</button>
+                        <button class="btn btn-secondary">View Event Pictures</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="/js/navbar.js"></script>
+    <script src="/js/footer.js"></script>
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>

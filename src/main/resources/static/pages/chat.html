@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chat - PhotoConnect</title>
+  <link rel="stylesheet" href="/css/site.css" />
+  <link rel="stylesheet" href="/css/chat.css" />
+</head>
+<body>
+  <div id="navbar"></div>
+
+  <main class="chat-container">
+    <aside class="chat-sidebar">
+      <div class="chat-card">
+        <div class="chat-card__header">
+          <h3>Join a Chat</h3>
+          <p class="chat-muted">Enter booking and user IDs</p>
+        </div>
+        <div class="room-controls">
+          <label for="bookingId">Booking ID</label>
+          <div class="chat-input-row">
+            <input id="bookingId" type="text" placeholder="e.g., 1024" />
+            <button id="joinBtn" class="btn-primary">Join</button>
+          </div>
+        </div>
+        <div class="room-controls">
+          <label for="userId">Your user ID (senderId)</label>
+          <input id="userId" type="text" placeholder="your-user-id" />
+        </div>
+      </div>
+
+      <div class="chat-card chat-card--compact">
+        <h4>Active Room</h4>
+        <div class="room-pill" id="currentRoom">None</div>
+        <div class="chat-muted">Messages will appear in real-time.</div>
+      </div>
+    </aside>
+
+    <section class="chat-main">
+      <header class="chat-header">
+        <div>
+          <h2>Chat Room</h2>
+          <div class="chat-muted">Secure messaging for your booking</div>
+        </div>
+        <div class="chat-status">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span class="status-text">Connected</span>
+        </div>
+      </header>
+
+      <div class="messages" id="messages" aria-live="polite"></div>
+
+      <div class="composer">
+        <input id="messageInput" type="text" placeholder="Type a message..." />
+        <button id="sendBtn" class="btn-primary">Send</button>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="/js/navbar.js"></script>
+  <script src="/js/footer.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.0.0/bundles/stomp.umd.min.js"></script>
+  <script src="/js/chat.js"></script>
+</body>
+</html>

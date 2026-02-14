@@ -1,0 +1,26 @@
+<header class="page-header">
+  <h1 id="page-title">Page Title</h1>
+  <p id="page-subtitle">Page subtitle goes here</p>
+  <div class="breadcrumb" id="breadcrumb-container">
+    <a href="/index.html">Home</a>
+  </div>
+</header>
+
+<script>
+  // Function to set header content - can be called from page-specific scripts
+  function setPageHeader(title, subtitle, breadcrumbs) {
+    if (title) document.getElementById('page-title').textContent = title;
+    if (subtitle) document.getElementById('page-subtitle').textContent = subtitle;
+    
+    if (breadcrumbs) {
+      const container = document.getElementById('breadcrumb-container');
+      container.innerHTML = breadcrumbs.map((item, index) => {
+        if (item.url) {
+          return `<a href="${item.url}">${item.label}</a>${index < breadcrumbs.length - 1 ? '<span>/</span>' : ''}`;
+        } else {
+          return `<span>${item.label}</span>${index < breadcrumbs.length - 1 ? '<span>/</span>' : ''}`;
+        }
+      }).join('');
+    }
+  }
+</script>
