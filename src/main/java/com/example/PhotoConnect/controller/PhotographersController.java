@@ -62,7 +62,9 @@ public class PhotographersController {
         // Handle null userId gracefully
         User user = null;
         if (profile.getUserId() != null) {
-            user = userRepository.findById(profile.getUserId()).orElse(null);
+            @SuppressWarnings("null")
+            User foundUser = userRepository.findById(profile.getUserId()).orElse(null);
+            user = foundUser;
         }
         
         m.put("id", profile.getId());

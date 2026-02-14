@@ -13,8 +13,7 @@ public class ClientProfileService {
     public ClientProfileService(ClientProfileRepository repo) {
         this.repo = repo;
     }
-
-    public ClientProfile save(ClientProfile profile) {
+    @SuppressWarnings("null")    public ClientProfile save(ClientProfile profile) {
         return repo.save(profile);
     }
 

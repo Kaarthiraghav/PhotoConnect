@@ -2,7 +2,6 @@ package com.example.PhotoConnect.controller;
 
 import com.example.PhotoConnect.service.ZipService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +16,6 @@ public class ZipController {
 
     private final ZipService zipService;
 
-    @Autowired
     public ZipController(ZipService zipService) {
         this.zipService = zipService;
     }
@@ -44,11 +42,13 @@ public class ZipController {
 
             // Return ZIP file
             String fileName = zipService.generateZipFileName(zipName);
-            return ResponseEntity.ok()
+            @SuppressWarnings("null")
+            ResponseEntity<byte[]> response = ResponseEntity.ok()
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
                     .contentType(MediaType.APPLICATION_OCTET_STREAM)
                     .contentLength(zipContent.length)
                     .body(zipContent);
+            return response;
 
         } catch (IOException e) {
             log.error("Error creating ZIP archive", e);

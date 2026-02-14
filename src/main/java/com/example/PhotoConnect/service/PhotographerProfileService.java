@@ -13,8 +13,7 @@ public class PhotographerProfileService {
     public PhotographerProfileService(PhotographerProfileRepository repo) {
         this.repo = repo;
     }
-
-    public PhotographerProfile save(PhotographerProfile profile) {
+    @SuppressWarnings("null")    public PhotographerProfile save(PhotographerProfile profile) {
         return repo.save(profile);
     }
 

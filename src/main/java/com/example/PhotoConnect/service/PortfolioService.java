@@ -27,11 +27,13 @@ public class PortfolioService {
         return portfolioRepository.findAll();
     }
 
+    @SuppressWarnings("null")
     public Optional<PortfolioItem> getPortfolioItemById(Long id) {
         return portfolioRepository.findById(id);
     }
 
     @Transactional
+    @SuppressWarnings("null")
     public PortfolioItem createPortfolioItem(PortfolioItem portfolioItem, List<MultipartFile> files) {
         try {
             // Save portfolio item first
@@ -79,6 +81,7 @@ public class PortfolioService {
     }
 
     @Transactional
+    @SuppressWarnings("null")
     public PortfolioItem updatePortfolioItem(Long id, PortfolioItem portfolioItem) {
         return portfolioRepository.findById(id)
                 .map(existingItem -> {
@@ -95,6 +98,7 @@ public class PortfolioService {
     }
 
     @Transactional
+    @SuppressWarnings("null")
     public void deletePortfolioItem(Long id) {
         portfolioRepository.findById(id).ifPresentOrElse(
                 portfolioItem -> {
@@ -120,6 +124,7 @@ public class PortfolioService {
     }
 
     @Transactional
+    @SuppressWarnings("null")
     public PortfolioItem addPhotosToPortfolio(Long portfolioId, List<MultipartFile> files) {
         PortfolioItem portfolioItem = portfolioRepository.findById(portfolioId)
                 .orElseThrow(() -> new RuntimeException("Portfolio item not found with id: " + portfolioId));

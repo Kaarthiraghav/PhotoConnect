@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (locationElement) locationElement.textContent = photographer.location || 'Not specified';
             
             const photoElement = document.getElementById('photographer-photo');
-            if (photoElement) photoElement.style.backgroundImage = `url('${photographer.profilePhoto || '/images/default-avatar.png'}')`;
+            if (photoElement) photoElement.style.backgroundImage = `url('${photographer.profilePhoto || '/images/default-avatar.svg'}')`;
             
         } catch (error) {
             console.error('Error loading photographer profile:', error);
